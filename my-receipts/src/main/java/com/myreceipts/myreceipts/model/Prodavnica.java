@@ -1,5 +1,6 @@
 package com.myreceipts.myreceipts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "prodavnici",
-        uniqueConstraints = @UniqueConstraint(columnNames = "adresa"),
+        uniqueConstraints = @UniqueConstraint(columnNames = {"adresa", "ime"}),
         schema = "project")
 public class Prodavnica implements Serializable {
 
@@ -25,21 +26,23 @@ public class Prodavnica implements Serializable {
     @Column(name = "id_prodavnica", nullable = false, unique = true)
     private Integer idProdavnica;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_firma", nullable = false)
-    private Firma firma;
-
     @Column(name = "ime")
     private String ime;
 
     @Column(name = "adresa")
     private String adresa;
 
-    @OneToMany(mappedBy = "prodavnica")
-    private List<Smetka> smetkaList;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_grad", nullable = false)
     private Grad grad;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_firma", nullable = false)
+    private Firma firma;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "prodavnica")
+    private List<Smetka> smetkaList;
 
 }

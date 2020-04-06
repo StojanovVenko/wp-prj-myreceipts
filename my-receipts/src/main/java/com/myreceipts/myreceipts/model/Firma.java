@@ -1,5 +1,6 @@
 package com.myreceipts.myreceipts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Firma implements Serializable {
     @Column(name = "adresa", nullable = false)
     private String adresa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "firma")
     private List<Prodavnica> prodavnicaList;
 
