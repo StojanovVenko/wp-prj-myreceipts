@@ -3,6 +3,7 @@ package com.myreceipts.myreceipts.service.impl;
 import com.myreceipts.myreceipts.model.Proizvod;
 import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
+import com.myreceipts.myreceipts.model.dto.ProizvodiNaSmetkaRequest;
 import com.myreceipts.myreceipts.repository.PorizvodNaSmetkaRepository;
 import com.myreceipts.myreceipts.repository.ProizvodiRepository;
 import com.myreceipts.myreceipts.repository.SmetkiRepository;
@@ -43,6 +44,18 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
         proizvodNaSmetka.setProizvod(proizvod);
         proizvodNaSmetka.setSmetka(smetka);
         return this.porizvodNaSmetkaRepository.save(proizvodNaSmetka);
+    }
+
+    @Override
+    public ProizvodiNaSmetkaRequest dodadiProizvodiNaSmetka(ProizvodiNaSmetkaRequest proizvodiNaSmetkaRequest) {
+
+        proizvodiNaSmetkaRequest.getListProizvodi()
+                .forEach(p -> dodadiProizvodNaSmetka(p.getIdProizvod(), proizvodiNaSmetkaRequest.getIdSmetka(), p.getCena(), p.getKolichina()));
+//        for(int i=0; i<proizvodiNaSmetkaRequest.getListProizvodi().size(); ++i){
+//            dodadiProizvodNaSmetka(proizvodiNaSmetkaRequest.getListProizvodi().get(i).getIdProizvod(), proizvodiNaSmetkaRequest.getIdSmetka(),
+//                    proizvodiNaSmetkaRequest.getListProizvodi().get(i).getCena(), proizvodiNaSmetkaRequest.getListProizvodi().get(i).getKolichina());
+//        }
+        return proizvodiNaSmetkaRequest;
     }
 
 }

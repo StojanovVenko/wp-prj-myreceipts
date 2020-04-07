@@ -1,6 +1,7 @@
 package com.myreceipts.myreceipts.web;
 
 import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
+import com.myreceipts.myreceipts.model.dto.ProizvodiNaSmetkaRequest;
 import com.myreceipts.myreceipts.service.ProizvodNaSmetkaService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +22,16 @@ public class ProizvodNaSmetkaController {
         return this.proizvodNaSmetkaService.findAll();
     }
 
-    @PostMapping
+    @PostMapping(path = "/update")
     ProizvodNaSmetka createProizvodNaSmetka(@RequestParam("idProizvod") Integer idProizvod,
                                             @RequestParam("idSmetka") Integer idSmetka,
                                             @RequestParam("cena") Float cena,
                                             @RequestParam("kolichina") Float kolichina) {
         return this.proizvodNaSmetkaService.dodadiProizvodNaSmetka(idProizvod, idSmetka, cena, kolichina);
+    }
+
+    @PostMapping
+    ProizvodiNaSmetkaRequest dodadiProdukti(@RequestBody ProizvodiNaSmetkaRequest proizvodiNaSmetkaRequest){
+        return this.proizvodNaSmetkaService.dodadiProizvodiNaSmetka(proizvodiNaSmetkaRequest);
     }
 }
