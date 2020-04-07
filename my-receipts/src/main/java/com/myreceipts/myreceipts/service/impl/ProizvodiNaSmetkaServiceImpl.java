@@ -46,15 +46,25 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
         return this.porizvodNaSmetkaRepository.save(proizvodNaSmetka);
     }
 
+    private ProizvodNaSmetka dodadi(Integer idProizvod, Smetka smetka, Float cena, Float kolichina){
+        Proizvod proizvod = this.proizvodiRepository.findById(idProizvod)
+                .orElseThrow(() -> new NoSuchElementException("Ne postoi proizvod so id: " + idProizvod));
+
+        ProizvodNaSmetka proizvodNaSmetka = new ProizvodNaSmetka();
+        proizvodNaSmetka.setCena(cena);
+        proizvodNaSmetka.setKolichina(kolichina);
+        proizvodNaSmetka.setProizvod(proizvod);
+        proizvodNaSmetka.setSmetka(smetka);
+        return this.porizvodNaSmetkaRepository.save(proizvodNaSmetka);
+    }
+
     @Override
     public ProizvodiNaSmetkaRequest dodadiProizvodiNaSmetka(ProizvodiNaSmetkaRequest proizvodiNaSmetkaRequest) {
+        Smetka smetka = this.smetkiRepository.findById(proizvodiNaSmetkaRequest.getIdSmetka())
+                .orElseThrow(() -> new NoSuchElementException("Ne postoi smetka so id: " + proizvodiNaSmetkaRequest.getIdSmetka()));
 
         proizvodiNaSmetkaRequest.getListProizvodi()
-                .forEach(p -> dodadiProizvodNaSmetka(p.getIdProizvod(), proizvodiNaSmetkaRequest.getIdSmetka(), p.getCena(), p.getKolichina()));
-//        for(int i=0; i<proizvodiNaSmetkaRequest.getListProizvodi().size(); ++i){
-//            dodadiProizvodNaSmetka(proizvodiNaSmetkaRequest.getListProizvodi().get(i).getIdProizvod(), proizvodiNaSmetkaRequest.getIdSmetka(),
-//                    proizvodiNaSmetkaRequest.getListProizvodi().get(i).getCena(), proizvodiNaSmetkaRequest.getListProizvodi().get(i).getKolichina());
-//        }
+                .forEach(p -> dodadi(p.getIdProizvod(), smetka, p.getCena(), p.getKolichina()));
         return proizvodiNaSmetkaRequest;
     }
 
