@@ -1,7 +1,10 @@
 package com.myreceipts.myreceipts.repository;
 
 import com.myreceipts.myreceipts.model.Smetka;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.myreceipts.myreceipts.model.vm.Page;
 
-public interface SmetkiRepository extends JpaRepository<Smetka, Integer> {
+public interface SmetkiRepository {
+
+    Page<Smetka> getAllSmetkiWithProducts(Integer page, Integer size);
+
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="/gradovi")
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GradoviController {
     private final GradoviService gradoviService;
 

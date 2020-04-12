@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/firmi")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FirmiController {
 
     private final FirmiService firmiService;

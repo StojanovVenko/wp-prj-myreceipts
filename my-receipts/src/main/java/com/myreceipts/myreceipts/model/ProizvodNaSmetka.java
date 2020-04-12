@@ -1,5 +1,6 @@
 package com.myreceipts.myreceipts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class ProizvodNaSmetka implements Serializable {
     @JoinColumn(name = "id_proizvod", referencedColumnName = "id_proizvod")
     private Proizvod proizvod;
 
+    @JsonIgnore
     @ManyToOne
 //    @MapsId("id_smetka")
     @JoinColumn(name = "id_smetka", referencedColumnName = "id_smetka")

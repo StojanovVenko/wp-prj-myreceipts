@@ -6,7 +6,7 @@ import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.dto.ProizvodiNaSmetkaRequest;
 import com.myreceipts.myreceipts.repository.PorizvodNaSmetkaRepository;
 import com.myreceipts.myreceipts.repository.ProizvodiRepository;
-import com.myreceipts.myreceipts.repository.SmetkiRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaSmetkiRepository;
 import com.myreceipts.myreceipts.service.ProizvodNaSmetkaService;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,12 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
 
     private final PorizvodNaSmetkaRepository porizvodNaSmetkaRepository;
     private final ProizvodiRepository proizvodiRepository;
-    private final SmetkiRepository smetkiRepository;
+    private final JpaSmetkiRepository jpaSmetkiRepository;
 
-    public ProizvodiNaSmetkaServiceImpl(PorizvodNaSmetkaRepository porizvodNaSmetkaRepository, ProizvodiRepository proizvodiRepository, SmetkiRepository smetkiRepository) {
+    public ProizvodiNaSmetkaServiceImpl(PorizvodNaSmetkaRepository porizvodNaSmetkaRepository, ProizvodiRepository proizvodiRepository, JpaSmetkiRepository jpaSmetkiRepository) {
         this.porizvodNaSmetkaRepository = porizvodNaSmetkaRepository;
         this.proizvodiRepository = proizvodiRepository;
-        this.smetkiRepository = smetkiRepository;
+        this.jpaSmetkiRepository = jpaSmetkiRepository;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
     public ProizvodNaSmetka dodadiProizvodNaSmetka(Integer idProizvod, Integer idSmetka, Float cena, Float kolichina) {
         Proizvod proizvod = this.proizvodiRepository.findById(idProizvod)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi proizvod so id: " + idProizvod));
-        Smetka smetka = this.smetkiRepository.findById(idSmetka)
+        Smetka smetka = this.jpaSmetkiRepository.findById(idSmetka)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi smetka so id: " + idSmetka));
 
         ProizvodNaSmetka proizvodNaSmetka = new ProizvodNaSmetka();
@@ -60,7 +60,7 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
 
     @Override
     public ProizvodiNaSmetkaRequest dodadiProizvodiNaSmetka(ProizvodiNaSmetkaRequest proizvodiNaSmetkaRequest) {
-        Smetka smetka = this.smetkiRepository.findById(proizvodiNaSmetkaRequest.getIdSmetka())
+        Smetka smetka = this.jpaSmetkiRepository.findById(proizvodiNaSmetkaRequest.getIdSmetka())
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi smetka so id: " + proizvodiNaSmetkaRequest.getIdSmetka()));
 
         proizvodiNaSmetkaRequest.getListProizvodi()

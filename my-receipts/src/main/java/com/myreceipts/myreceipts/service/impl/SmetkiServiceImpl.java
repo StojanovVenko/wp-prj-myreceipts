@@ -1,9 +1,13 @@
 package com.myreceipts.myreceipts.service.impl;
 
 import com.myreceipts.myreceipts.model.Prodavnica;
+import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
+import com.myreceipts.myreceipts.model.vm.Page;
+import com.myreceipts.myreceipts.repository.PorizvodNaSmetkaRepository;
 import com.myreceipts.myreceipts.repository.ProdavniciRepository;
 import com.myreceipts.myreceipts.repository.SmetkiRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaSmetkiRepository;
 import com.myreceipts.myreceipts.service.SmetkiService;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +19,36 @@ import java.util.Optional;
 @Service
 public class SmetkiServiceImpl implements SmetkiService {
 
+    private final JpaSmetkiRepository jpaSmetkiRepository;
     private final SmetkiRepository smetkiRepository;
     private final ProdavniciRepository prodavniciRepository;
+    private final PorizvodNaSmetkaRepository proizvodiNaSmetkaRepository;
 
-    public SmetkiServiceImpl(SmetkiRepository smetkiRepository, ProdavniciRepository prodavniciRepository) {
+    public SmetkiServiceImpl(JpaSmetkiRepository jpaSmetkiRepository, SmetkiRepository smetkiRepository, ProdavniciRepository prodavniciRepository, PorizvodNaSmetkaRepository proizvodiNaSmetkaRepository) {
+        this.jpaSmetkiRepository = jpaSmetkiRepository;
         this.smetkiRepository = smetkiRepository;
         this.prodavniciRepository = prodavniciRepository;
+        this.proizvodiNaSmetkaRepository = proizvodiNaSmetkaRepository;
+    }
+
+    @Override
+    public Page<Smetka> getSmetkiWithProducts(Integer page, Integer size) {
+        return this.smetkiRepository.getAllSmetkiWithProducts(page, size);
     }
 
     @Override
     public List<Smetka> findAll() {
-        return this.smetkiRepository.findAll();
+        return this.jpaSmetkiRepository.findAll();
+    }
+
+    @Override
+    public List<Object> findAllDto() {
+        return this.jpaSmetkiRepository.findAllDto();
+    }
+
+    @Override
+    public List<ProizvodNaSmetka> getSmetkaInfo(Integer idSmetka) {
+        return this.proizvodiNaSmetkaRepository.findAllBySmetka_IdSmetka(idSmetka);
     }
 
     @Override
@@ -44,6 +67,6 @@ public class SmetkiServiceImpl implements SmetkiService {
             smetka.setDdvBroj(ddvBroj.get());
         if(danochenBroj.isPresent())
             smetka.setDanochenBroj(danochenBroj.get());
-        return this.smetkiRepository.save(smetka);
+        return this.jpaSmetkiRepository.save(smetka);
     }
 }
