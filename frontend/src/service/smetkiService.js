@@ -5,11 +5,11 @@ import axios from "../custom-axios/axios";
 const Smetki = {
 
     getSmetkaIfno: (id) => {
-        return apiUtils.get(`/smetki/${id}`);
+        return apiUtils.get(`/api/smetki/${id}`);
     },
 
     getSmetkiSoProdukti:(page,pageSize)=>{
-        return axios.get(`/smetki`,{
+        return axios.get(`/api/smetki`,{
             headers: {
                 'page':page,
                 'page-size':pageSize

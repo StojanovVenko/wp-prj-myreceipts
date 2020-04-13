@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import SmetkaInfo from "./SmetkaInfo/smetkaInfo";
 import SmetkiService from "../../../../../service/smetkiService";
 import {Link} from "react-router-dom";
 
@@ -17,7 +16,7 @@ const Smetka = (props) => {
     let cena = 0.0;
     let proizvodi = state.map((proizvod,index) => {
         cena += proizvod.kolichina * proizvod.cena;
-       return <div class="mt-2 mb-2 row">
+       return <div className="mt-2 mb-2 row">
            <div className="col-sm-3">
                {proizvod.kolichina}
            </div>
@@ -87,7 +86,6 @@ const Smetka = (props) => {
                         </div>
                     </div>
 
-                    {/*<SmetkaInfo />*/}
                 </div>
             </div>
         </div>

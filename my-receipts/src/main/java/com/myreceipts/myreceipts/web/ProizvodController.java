@@ -2,12 +2,13 @@ package com.myreceipts.myreceipts.web;
 
 import com.myreceipts.myreceipts.model.Proizvod;
 import com.myreceipts.myreceipts.service.ProizvodService;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/proizvodi")
+@RequestMapping(path = "/api/proizvodi", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProizvodController {
 

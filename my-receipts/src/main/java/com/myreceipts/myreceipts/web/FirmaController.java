@@ -2,12 +2,13 @@ package com.myreceipts.myreceipts.web;
 
 import com.myreceipts.myreceipts.model.Firma;
 import com.myreceipts.myreceipts.service.FirmaService;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/firmi")
+@RequestMapping(path = "/api/firmi", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 @CrossOrigin(origins = "http://localhost:3000")
 public class FirmaController {
 

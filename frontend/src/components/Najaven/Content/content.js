@@ -2,6 +2,7 @@ import React from "react";
 import {Redirect, Route, Switch} from "react-router";
 import Smetki from "./Smetki/smetki";
 import SmetkiService from "../../../service/smetkiService";
+import KreiranjeSmetka from "./Smetki/KreiranjeSmetka/kreiranjeSmetka";
 
 class Content extends React.Component{
 
@@ -18,7 +19,7 @@ class Content extends React.Component{
                     Pochetna
                 </Route>
                 <Route path={"/smetki/dodadi"} exact>
-                    Kreiranje smetka
+                    <KreiranjeSmetka/>
                 </Route>
                 <Route path={"/smetki"} exact>
                     <Smetki/>

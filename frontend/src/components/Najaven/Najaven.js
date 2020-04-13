@@ -5,7 +5,7 @@ import {withRouter} from "react-router";
 import Content from "./Content/content";
 import SmetkiService from "../../service/smetkiService";
 import Smetki from "./Content/Smetki/smetki";
-
+import GradoviService from "../../service/gradoviService";
 class Najaven extends React.Component {
 
     constructor(props){

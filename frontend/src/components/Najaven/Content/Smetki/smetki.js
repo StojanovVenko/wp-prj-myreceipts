@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import SmetkiService from "../../../../service/smetkiService";
-import SmetkaInfo from "./Smetka/SmetkaInfo/smetkaInfo";
 import Smetka from "./Smetka/smetka";
 import ReactPaginate from "react-paginate";
 

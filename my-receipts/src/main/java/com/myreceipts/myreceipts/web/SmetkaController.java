@@ -5,6 +5,7 @@ import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.vm.Page;
 import com.myreceipts.myreceipts.service.SmetkaService;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/smetki")
+@RequestMapping(path = "/api/smetki", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 @CrossOrigin(origins = "http://localhost:3000")
 public class SmetkaController {
 
