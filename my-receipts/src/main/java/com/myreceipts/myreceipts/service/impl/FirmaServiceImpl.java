@@ -2,23 +2,23 @@ package com.myreceipts.myreceipts.service.impl;
 
 import com.myreceipts.myreceipts.model.Firma;
 import com.myreceipts.myreceipts.model.Grad;
-import com.myreceipts.myreceipts.repository.FirmiRepository;
-import com.myreceipts.myreceipts.repository.GradoviRepository;
-import com.myreceipts.myreceipts.service.FirmiService;
+import com.myreceipts.myreceipts.repository.FirmaRepository;
+import com.myreceipts.myreceipts.repository.GradRepository;
+import com.myreceipts.myreceipts.service.FirmaService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class FirmiServiceImpl implements FirmiService {
+public class FirmaServiceImpl implements FirmaService {
 
-    private final FirmiRepository firmiRepository;
-    private final GradoviRepository gradoviRepository;
+    private final FirmaRepository firmaRepository;
+    private final GradRepository gradRepository;
 
-    public FirmiServiceImpl(FirmiRepository firmiRepository, GradoviRepository gradoviRepository) {
-        this.firmiRepository = firmiRepository;
-        this.gradoviRepository = gradoviRepository;
+    public FirmaServiceImpl(FirmaRepository firmaRepository, GradRepository gradRepository) {
+        this.firmaRepository = firmaRepository;
+        this.gradRepository = gradRepository;
     }
 
     @Override
@@ -27,11 +27,11 @@ public class FirmiServiceImpl implements FirmiService {
         firma.setIme(ime);
         firma.setAdresa(adresa);
 
-        Grad grad = this.gradoviRepository.findById(idGrad)
+        Grad grad = this.gradRepository.findById(idGrad)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi grad so id:" + idGrad));
 
         firma.setGrad(grad);
-        return this.firmiRepository.save(firma);
+        return this.firmaRepository.save(firma);
     }
 
     @Override

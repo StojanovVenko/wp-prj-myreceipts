@@ -1,25 +1,25 @@
 package com.myreceipts.myreceipts.web;
 
 import com.myreceipts.myreceipts.model.Prodavnica;
-import com.myreceipts.myreceipts.service.ProdavniciService;
+import com.myreceipts.myreceipts.service.ProdavnicaService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/prodavnici")
+@RequestMapping(path = "/api/prodavnici")
 @CrossOrigin(origins = "http://localhost:3000")
-public class ProdavniciController {
+public class ProdavnicaController {
 
-    private final ProdavniciService prodavniciService;
+    private final ProdavnicaService prodavnicaService;
 
-    public ProdavniciController(ProdavniciService prodavniciService) {
-        this.prodavniciService = prodavniciService;
+    public ProdavnicaController(ProdavnicaService prodavnicaService) {
+        this.prodavnicaService = prodavnicaService;
     }
 
     @GetMapping
     List<Prodavnica> findAll() {
-        return this.prodavniciService.findAll();
+        return this.prodavnicaService.findAll();
     }
 
     @PostMapping
@@ -27,7 +27,7 @@ public class ProdavniciController {
                                 @RequestParam("adresa") String adresa,
                                 @RequestParam("idFirma") Integer idFirma,
                                 @RequestParam("idGrad") Integer idGrad) {
-        return this.prodavniciService.createProdavnica(ime, adresa, idFirma, idGrad);
+        return this.prodavnicaService.createProdavnica(ime, adresa, idFirma, idGrad);
     }
 
 }

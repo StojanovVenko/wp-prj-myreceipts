@@ -5,8 +5,8 @@ import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.dto.ProizvodiNaSmetkaRequest;
 import com.myreceipts.myreceipts.repository.PorizvodNaSmetkaRepository;
-import com.myreceipts.myreceipts.repository.ProizvodiRepository;
-import com.myreceipts.myreceipts.repository.jpa.JpaSmetkiRepository;
+import com.myreceipts.myreceipts.repository.ProizvodRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaSmetkaRepository;
 import com.myreceipts.myreceipts.service.ProizvodNaSmetkaService;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
+public class ProizvodNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
 
     private final PorizvodNaSmetkaRepository porizvodNaSmetkaRepository;
-    private final ProizvodiRepository proizvodiRepository;
-    private final JpaSmetkiRepository jpaSmetkiRepository;
+    private final ProizvodRepository proizvodRepository;
+    private final JpaSmetkaRepository jpaSmetkaRepository;
 
-    public ProizvodiNaSmetkaServiceImpl(PorizvodNaSmetkaRepository porizvodNaSmetkaRepository, ProizvodiRepository proizvodiRepository, JpaSmetkiRepository jpaSmetkiRepository) {
+    public ProizvodNaSmetkaServiceImpl(PorizvodNaSmetkaRepository porizvodNaSmetkaRepository, ProizvodRepository proizvodRepository, JpaSmetkaRepository jpaSmetkaRepository) {
         this.porizvodNaSmetkaRepository = porizvodNaSmetkaRepository;
-        this.proizvodiRepository = proizvodiRepository;
-        this.jpaSmetkiRepository = jpaSmetkiRepository;
+        this.proizvodRepository = proizvodRepository;
+        this.jpaSmetkaRepository = jpaSmetkaRepository;
     }
 
     @Override
@@ -33,9 +33,9 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
 
     @Override
     public ProizvodNaSmetka dodadiProizvodNaSmetka(Integer idProizvod, Integer idSmetka, Float cena, Float kolichina) {
-        Proizvod proizvod = this.proizvodiRepository.findById(idProizvod)
+        Proizvod proizvod = this.proizvodRepository.findById(idProizvod)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi proizvod so id: " + idProizvod));
-        Smetka smetka = this.jpaSmetkiRepository.findById(idSmetka)
+        Smetka smetka = this.jpaSmetkaRepository.findById(idSmetka)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi smetka so id: " + idSmetka));
 
         ProizvodNaSmetka proizvodNaSmetka = new ProizvodNaSmetka();
@@ -47,7 +47,7 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
     }
 
     private ProizvodNaSmetka dodadi(Integer idProizvod, Smetka smetka, Float cena, Float kolichina){
-        Proizvod proizvod = this.proizvodiRepository.findById(idProizvod)
+        Proizvod proizvod = this.proizvodRepository.findById(idProizvod)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi proizvod so id: " + idProizvod));
 
         ProizvodNaSmetka proizvodNaSmetka = new ProizvodNaSmetka();
@@ -60,7 +60,7 @@ public class ProizvodiNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
 
     @Override
     public ProizvodiNaSmetkaRequest dodadiProizvodiNaSmetka(ProizvodiNaSmetkaRequest proizvodiNaSmetkaRequest) {
-        Smetka smetka = this.jpaSmetkiRepository.findById(proizvodiNaSmetkaRequest.getIdSmetka())
+        Smetka smetka = this.jpaSmetkaRepository.findById(proizvodiNaSmetkaRequest.getIdSmetka())
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi smetka so id: " + proizvodiNaSmetkaRequest.getIdSmetka()));
 
         proizvodiNaSmetkaRequest.getListProizvodi()

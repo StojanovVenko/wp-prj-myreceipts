@@ -1,29 +1,29 @@
 package com.myreceipts.myreceipts.web;
 
 import com.myreceipts.myreceipts.model.Grad;
-import com.myreceipts.myreceipts.service.GradoviService;
+import com.myreceipts.myreceipts.service.GradService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/gradovi")
+@RequestMapping(path="/api/gradovi")
 @CrossOrigin(origins = "http://localhost:3000")
-public class GradoviController {
-    private final GradoviService gradoviService;
+public class GradController {
+    private final GradService gradService;
 
-    public GradoviController(GradoviService gradoviService) {
-        this.gradoviService = gradoviService;
+    public GradController(GradService gradService) {
+        this.gradService = gradService;
     }
 
     @GetMapping
     public List<Grad> findAll() {
-        return this.gradoviService.getAllGradovi();
+        return this.gradService.getAllGradovi();
     }
 
     @PostMapping
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Grad createGrad(@RequestParam String imeGrad){
-        return this.gradoviService.createGrad(imeGrad);
+        return this.gradService.createGrad(imeGrad);
     }
 }

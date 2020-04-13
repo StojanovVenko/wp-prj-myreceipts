@@ -4,7 +4,7 @@ import com.myreceipts.myreceipts.model.Proizvod;
 
 import java.util.List;
 
-public interface ProizvodiService {
+public interface ProizvodService {
 
     List<Proizvod> findAll();
 

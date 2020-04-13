@@ -19,7 +19,7 @@ public class Proizvod implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_proizvod", nullable = false)
+    @Column(name = "id_proizvod", nullable = false, unique = true)
     private Integer idProizvod;
 
     @Column(name = "ime", nullable = false)

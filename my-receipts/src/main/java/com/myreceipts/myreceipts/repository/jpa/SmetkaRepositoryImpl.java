@@ -2,16 +2,16 @@ package com.myreceipts.myreceipts.repository.jpa;
 
 import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.vm.Page;
-import com.myreceipts.myreceipts.repository.SmetkiRepository;
+import com.myreceipts.myreceipts.repository.SmetkaRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SmetkiRepositoryImpl implements SmetkiRepository {
+public class SmetkaRepositoryImpl implements SmetkaRepository {
 
-    private final JpaSmetkiRepository repository;
+    private final JpaSmetkaRepository repository;
 
-    public SmetkiRepositoryImpl(JpaSmetkiRepository repository) {
+    public SmetkaRepositoryImpl(JpaSmetkaRepository repository) {
         this.repository = repository;
     }
 

@@ -21,7 +21,7 @@ public class ProizvodNaSmetka implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_proizvod_na_smetka")
+    @Column(name = "id_proizvod_na_smetka", nullable = false, unique = true)
     private Integer proizvodNaSmetkaId;
 
     @Column(name = "cena")

@@ -1,30 +1,30 @@
 package com.myreceipts.myreceipts.service.impl;
 
 import com.myreceipts.myreceipts.model.Proizvod;
-import com.myreceipts.myreceipts.repository.ProizvodiRepository;
-import com.myreceipts.myreceipts.service.ProizvodiService;
+import com.myreceipts.myreceipts.repository.ProizvodRepository;
+import com.myreceipts.myreceipts.service.ProizvodService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProizvodServiceImpl implements ProizvodiService {
+public class ProizvodServiceImpl implements ProizvodService {
 
-    private final ProizvodiRepository proizvodiRepository;
+    private final ProizvodRepository proizvodRepository;
 
-    public ProizvodServiceImpl(ProizvodiRepository proizvodiRepository) {
-        this.proizvodiRepository = proizvodiRepository;
+    public ProizvodServiceImpl(ProizvodRepository proizvodRepository) {
+        this.proizvodRepository = proizvodRepository;
     }
 
     @Override
     public List<Proizvod> findAll() {
-        return this.proizvodiRepository.findAll();
+        return this.proizvodRepository.findAll();
     }
 
     @Override
     public Proizvod createProizvod(String ime) {
         Proizvod proizvod = new Proizvod();
         proizvod.setIme(ime);
-        return this.proizvodiRepository.save(proizvod);
+        return this.proizvodRepository.save(proizvod);
     }
 }

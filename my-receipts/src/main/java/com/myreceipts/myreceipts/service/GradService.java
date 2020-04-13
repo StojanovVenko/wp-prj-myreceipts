@@ -5,7 +5,7 @@ import com.myreceipts.myreceipts.model.Grad;
 import java.util.List;
 
 
-public interface GradoviService {
+public interface GradService {
 
     List<Grad> getAllGradovi();
 

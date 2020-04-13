@@ -3,7 +3,7 @@ package com.myreceipts.myreceipts.web;
 import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.vm.Page;
-import com.myreceipts.myreceipts.service.SmetkiService;
+import com.myreceipts.myreceipts.service.SmetkaService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/smetki")
+@RequestMapping("/api/smetki")
 @CrossOrigin(origins = "http://localhost:3000")
-public class SmetkiController {
+public class SmetkaController {
 
-    private final SmetkiService smetkiService;
+    private final SmetkaService smetkaService;
 
-    public SmetkiController(SmetkiService smetkiService) {
-        this.smetkiService = smetkiService;
+    public SmetkaController(SmetkaService smetkaService) {
+        this.smetkaService = smetkaService;
     }
 
 //    @GetMapping
@@ -34,17 +34,17 @@ public class SmetkiController {
                         @RequestParam("vkupnoDDV") Float vkupnoDDV,
                         @RequestParam(name = "danochenBroj", required = false) Optional<String> danochenBroj,
                         @RequestParam(name = "ddvBroj", required = false) Optional<String> ddvBroj ) {
-        return this.smetkiService.createSmetka(datum, idProdavnica, vkupnoPromet,
+        return this.smetkaService.createSmetka(datum, idProdavnica, vkupnoPromet,
                 vkupnoDDV, danochenBroj, ddvBroj );
     }
     @GetMapping(path = "/{id}")
     List<ProizvodNaSmetka> getSmetkaWithProducts(@PathVariable Integer id) {
-        return this.smetkiService.getSmetkaInfo(id);
+        return this.smetkaService.getSmetkaInfo(id);
     }
 
     @GetMapping
     public Page<Smetka> getSmetkiWithProducts(@RequestHeader(name = "page", defaultValue = "0", required = false) int page,
                                                 @RequestHeader(name = "page-size", defaultValue = "10", required = false) int size) {
-        return this.smetkiService.getSmetkiWithProducts(page, size);
+        return this.smetkaService.getSmetkiWithProducts(page, size);
     }
 }

@@ -22,7 +22,7 @@ public class Grad implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_grad", nullable = false)
+    @Column(name = "id_grad", nullable = false, unique = true)
     private Integer idGrad;
 
     @Column(name = "ime_grad", nullable = false)

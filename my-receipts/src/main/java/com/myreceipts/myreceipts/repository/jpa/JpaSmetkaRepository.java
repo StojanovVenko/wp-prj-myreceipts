@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface JpaSmetkiRepository extends JpaRepository<Smetka, Integer> {
+public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
 
     @Query(value = "select s.id_smetka, s.datum, s.vkupen_promet, p.ime as prodavnica, f.ime as firma from project.smetki as s " +
             "inner join project.prodavnici as p on p.id_prodavnica=s.id_prodavnica " +

@@ -4,7 +4,7 @@ import com.myreceipts.myreceipts.model.Firma;
 
 import java.util.List;
 
-public interface FirmiService {
+public interface FirmaService {
 
     Firma createFirma(String ime, String adresa, Integer idGrad);
 

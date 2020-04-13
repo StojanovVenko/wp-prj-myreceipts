@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public interface SmetkiService {
+public interface SmetkaService {
 
     Page<Smetka> getSmetkiWithProducts(Integer page, Integer size);
 

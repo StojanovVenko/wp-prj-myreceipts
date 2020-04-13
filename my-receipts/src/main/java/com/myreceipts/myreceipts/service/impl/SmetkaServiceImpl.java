@@ -5,10 +5,10 @@ import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.vm.Page;
 import com.myreceipts.myreceipts.repository.PorizvodNaSmetkaRepository;
-import com.myreceipts.myreceipts.repository.ProdavniciRepository;
-import com.myreceipts.myreceipts.repository.SmetkiRepository;
-import com.myreceipts.myreceipts.repository.jpa.JpaSmetkiRepository;
-import com.myreceipts.myreceipts.service.SmetkiService;
+import com.myreceipts.myreceipts.repository.ProdavnicaRepository;
+import com.myreceipts.myreceipts.repository.SmetkaRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaSmetkaRepository;
+import com.myreceipts.myreceipts.service.SmetkaService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,33 +17,33 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class SmetkiServiceImpl implements SmetkiService {
+public class SmetkaServiceImpl implements SmetkaService {
 
-    private final JpaSmetkiRepository jpaSmetkiRepository;
-    private final SmetkiRepository smetkiRepository;
-    private final ProdavniciRepository prodavniciRepository;
+    private final JpaSmetkaRepository jpaSmetkaRepository;
+    private final SmetkaRepository smetkaRepository;
+    private final ProdavnicaRepository prodavnicaRepository;
     private final PorizvodNaSmetkaRepository proizvodiNaSmetkaRepository;
 
-    public SmetkiServiceImpl(JpaSmetkiRepository jpaSmetkiRepository, SmetkiRepository smetkiRepository, ProdavniciRepository prodavniciRepository, PorizvodNaSmetkaRepository proizvodiNaSmetkaRepository) {
-        this.jpaSmetkiRepository = jpaSmetkiRepository;
-        this.smetkiRepository = smetkiRepository;
-        this.prodavniciRepository = prodavniciRepository;
+    public SmetkaServiceImpl(JpaSmetkaRepository jpaSmetkaRepository, SmetkaRepository smetkaRepository, ProdavnicaRepository prodavnicaRepository, PorizvodNaSmetkaRepository proizvodiNaSmetkaRepository) {
+        this.jpaSmetkaRepository = jpaSmetkaRepository;
+        this.smetkaRepository = smetkaRepository;
+        this.prodavnicaRepository = prodavnicaRepository;
         this.proizvodiNaSmetkaRepository = proizvodiNaSmetkaRepository;
     }
 
     @Override
     public Page<Smetka> getSmetkiWithProducts(Integer page, Integer size) {
-        return this.smetkiRepository.getAllSmetkiWithProducts(page, size);
+        return this.smetkaRepository.getAllSmetkiWithProducts(page, size);
     }
 
     @Override
     public List<Smetka> findAll() {
-        return this.jpaSmetkiRepository.findAll();
+        return this.jpaSmetkaRepository.findAll();
     }
 
     @Override
     public List<Object> findAllDto() {
-        return this.jpaSmetkiRepository.findAllDto();
+        return this.jpaSmetkaRepository.findAllDto();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SmetkiServiceImpl implements SmetkiService {
     @Override
     public Smetka createSmetka(Date datum, Integer idProdavnica, Double vkupnoPromet, Float vkupnoDDV,
                                Optional<String> danochenBroj, Optional<String> ddvBroj) {
-        Prodavnica prodavnica = this.prodavniciRepository.findById(idProdavnica)
+        Prodavnica prodavnica = this.prodavnicaRepository.findById(idProdavnica)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi prodavnica so id: " + idProdavnica));
 
         Smetka smetka = new Smetka();
@@ -67,6 +67,6 @@ public class SmetkiServiceImpl implements SmetkiService {
             smetka.setDdvBroj(ddvBroj.get());
         if(danochenBroj.isPresent())
             smetka.setDanochenBroj(danochenBroj.get());
-        return this.jpaSmetkiRepository.save(smetka);
+        return this.jpaSmetkaRepository.save(smetka);
     }
 }

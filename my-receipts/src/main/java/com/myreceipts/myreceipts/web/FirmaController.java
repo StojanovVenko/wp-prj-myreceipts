@@ -1,32 +1,32 @@
 package com.myreceipts.myreceipts.web;
 
 import com.myreceipts.myreceipts.model.Firma;
-import com.myreceipts.myreceipts.service.FirmiService;
+import com.myreceipts.myreceipts.service.FirmaService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/firmi")
+@RequestMapping(path = "/api/firmi")
 @CrossOrigin(origins = "http://localhost:3000")
-public class FirmiController {
+public class FirmaController {
 
-    private final FirmiService firmiService;
+    private final FirmaService firmaService;
 
-    public FirmiController(FirmiService firmiService) {
-        this.firmiService = firmiService;
+    public FirmaController(FirmaService firmaService) {
+        this.firmaService = firmaService;
     }
 
     @GetMapping
     public List<Firma> findAll() {
-        return this.firmiService.findAll();
+        return this.firmaService.findAll();
     }
 
     @PostMapping
     public Firma createFirma(@RequestParam("ime") String ime,
                              @RequestParam("adresa") String adresa,
                              @RequestParam("idGrad") Integer idGrad) {
-        return this.firmiService.createFirma(ime, adresa, idGrad);
+        return this.firmaService.createFirma(ime, adresa, idGrad);
     }
 
 }
