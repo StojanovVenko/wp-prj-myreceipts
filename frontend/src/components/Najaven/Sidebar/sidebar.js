@@ -43,6 +43,12 @@ const Sidebar = (props) => {
                             <span>Фискални сметки</span></Link>
                     </li>
 
+                    <li className="nav-item">
+                        <Link to="/smetki" className="nav-link">
+                            <i className="fas fa-fw fa-chart-area"/>
+                            <span>Мои производи</span></Link>
+                    </li>
+
 
                     {/*// <!-- Nav Item - Utilities Collapse Menu -->*/}
                     <li className="nav-item">

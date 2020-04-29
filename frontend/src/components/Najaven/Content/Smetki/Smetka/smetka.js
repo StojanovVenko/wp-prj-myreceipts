@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const Smetka = (props) => {
 
     let [state, setState] = useState([]);
+    let [hide, setHide] = useState(true);
 
     useEffect(() => {
         SmetkiService.getSmetkaIfno(props.smetka.idSmetka)
@@ -32,9 +33,9 @@ const Smetka = (props) => {
 
     return (
 
-        <div className="card shadow mb-4">
+        <div className="card shadow mb-4 ">
             {/*// <!-- Card Header - Accordion -->*/}
-            <a href={"#collapseCardExample" + props.index} className="d-block card-header py-3" data-toggle="collapse"
+            <a href={"#collapseCardExample" + props.index} onClick={() => setHide(!hide)} className="d-block card-header py-3" data-toggle="collapse"
                role="button" aria-expanded="true" aria-controls={"collapseCardExample" + props.index}>
                 {/*<h6 className="m-0 font-weight-bold text-primary">*/}
                 <div className="row text-center">
@@ -47,7 +48,7 @@ const Smetka = (props) => {
 
             </a>
             {/*// <!-- Card Content - Collapse -->*/}
-            <div className="collapse hide" id={"collapseCardExample" + props.index}>
+            <div className={"collapse hide"} id={"collapseCardExample" + props.index}>
                 <div className="card-body row">
                     <div className="col-sm-2">
 

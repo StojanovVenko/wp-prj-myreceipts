@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dodadi-produkt", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/dodadi-produkt", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProizvodNaSmetkaController {
 

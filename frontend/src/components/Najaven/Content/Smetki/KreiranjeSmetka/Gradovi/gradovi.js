@@ -15,8 +15,6 @@ class Gradovi extends React.Component {
         }
     }
 
-
-
     componentDidMount() {
         GradoviService.getAllGradovi()
             .then(response => {

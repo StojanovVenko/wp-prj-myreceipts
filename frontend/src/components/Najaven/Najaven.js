@@ -17,9 +17,9 @@ class Najaven extends React.Component {
     render() {
         return (
             <div id="wrapper">
-                <Sidebar getSmetki={this.loadSmetkiSoProdukti}/>
+                <Sidebar/>
                 <div id="content-wrapper" className="d-flex flex-column" >
-                    <div id="content" style={{height:" 100px !important", overflow: "scroll !important"}}>
+                    <div id="content" >
                         <Header/>
                         <Content/>
                     </div>
