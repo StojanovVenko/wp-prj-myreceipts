@@ -17,6 +17,40 @@ const Smetki = {
         })
     },
 
+    getSmetkiSoProduktiSoFiltri: (page, size, idGrad, idProdavnica, startPrice, endPrice, satartDate, endDate) => {
+        return axios.get(`/api/smetki`, {
+            params: {
+                gr: idGrad,
+                pr: idProdavnica,
+                sp: startPrice,
+                ep: endPrice,
+                sd: satartDate,
+                ed: endDate
+            },
+            headers: {
+                'page':page,
+                'page-size': size
+            }
+        });
+    },
+    getSmetkiSoProduktiSoFiltriZaFirma: (page, size, idFirma, idProdavnica, startPrice, endPrice, satartDate, endDate) => {
+        return axios.get(`/api/firmi/${idFirma}/smetki`, {
+            params: {
+                // firma: idFirma,
+                pr: idProdavnica,
+                sp: startPrice,
+                ep: endPrice,
+                sd: satartDate,
+                ed: endDate
+            },
+            headers: {
+                'page':page,
+                'page-size': size
+            }
+        });
+    }
+// }?page=${page}&size=${size}&gr=
+// ${idGrad}&pr=${idProdavnica}&sp=${startPrice}&ep=${endPrice}&sd=${satartDate}&ed=${endDate}`);
 
 };
 export default Smetki;

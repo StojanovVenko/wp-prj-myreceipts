@@ -4,6 +4,7 @@ import com.myreceipts.myreceipts.model.Firma;
 import com.myreceipts.myreceipts.repository.FirmaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,5 +25,10 @@ public class FirmaRepositoryImpl implements FirmaRepository {
     @Override
     public Firma save(Firma firma) {
         return this.firmiRepository.save(firma);
+    }
+
+    @Override
+    public List<Firma> findAll() {
+        return this.firmiRepository.findAll();
     }
 }

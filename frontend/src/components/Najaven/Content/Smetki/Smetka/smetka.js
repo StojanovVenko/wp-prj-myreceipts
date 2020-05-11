@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 
 const Smetka = (props) => {
 
-    let [state, setState] = useState([]);
     let [hide, setHide] = useState(true);
+    let [state, setState] = useState([]);
 
     useEffect(() => {
         SmetkiService.getSmetkaIfno(props.smetka.idSmetka)
@@ -55,7 +55,19 @@ const Smetka = (props) => {
                     </div>
                     <div className="col-sm-8 ">
                         Фирма:
-                        <Link to="#" onClick=""> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa}</Link>
+                        <Link to={{
+                            pathname: `/firmi`,
+                            state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                            firma: props.smetka.prodavnica.firma}
+                        }}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa} tukaa
+                        </Link>
+                        {/*<Link to={{*/}
+                        {/*    pathname:`/firmi/${props.smetka.prodavnica.firma.idFirma}`,*/}
+                        {/*    state: {*/}
+                        {/*        idFirma: props.smetka.prodavnica.firma.idFirma*/}
+                        {/*    }*/}
+                        {/*}}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa}*/}
+                        {/*</Link>*/}
                         - <Link to="#" onClick="">{props.smetka.prodavnica.firma.grad.ime}</Link>
                         <br/>
                         Продавница: <Link to="#" onClick=""> {props.smetka.prodavnica.ime}, {props.smetka.prodavnica.adresa}</Link>

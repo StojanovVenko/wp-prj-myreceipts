@@ -3,8 +3,8 @@
 import * as React from "react";
 import {useState} from "react";
 import FormControl from "react-bootstrap/FormControl";
-import GradoviService from "../../../../../../../service/gradoviService";
-export const CustomToggle = React.forwardRef(({ children, onClick, disabled }, ref) => (
+
+export const CustomToggleProdavnici = React.forwardRef(({ children, onClick, disabled }, ref) => (
     <button
         className={"btn btn-primary btn-block"}
         ref={ref}
@@ -20,7 +20,7 @@ export const CustomToggle = React.forwardRef(({ children, onClick, disabled }, r
 ));
 // forwardRef again here!
 // Dropdown needs access to the DOM of the Menu to measure it
-export const CustomMenu = React.forwardRef(
+export const CustomMenuProdavnici = React.forwardRef(
     ({ children, style, className, 'aria-labelledby': labeledBy, props }, ref) => {
         const [value, setValue] = useState('');
 
@@ -35,7 +35,7 @@ export const CustomMenu = React.forwardRef(
                 <FormControl
                     autoFocus
                     className="mx-3 my-2 w-auto"
-                    placeholder="Внеси филтер..."
+                    placeholder="Пребарај продавница..."
                     onChange={e => setValue(e.target.value)}
                     value={value}
                 />

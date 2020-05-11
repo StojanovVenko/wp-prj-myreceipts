@@ -3,6 +3,9 @@ import {Redirect, Route, Switch} from "react-router";
 import Smetki from "./Smetki/smetki";
 import SmetkiService from "../../../service/smetkiService";
 import KreiranjeSmetka from "./Smetki/KreiranjeSmetka/kreiranjeSmetka";
+import Gradovi from "./Gradovi/gradovi";
+import Firmi from "./Firmi/firmi";
+import Firms from "./Firms/Firms";
 
 class Content extends React.Component{
 
@@ -42,15 +45,14 @@ class Content extends React.Component{
                 <Route path={"/prodavnici" } exact>
                     Prodavnici
                 </Route>
-                <Route path={"/firmi" } exact>
-                    Firmi
+                <Route path={"/firmi"} component={Firms} >
+                    {/*<Firmi />*/}
                 </Route>
                 <Route path={"/gradovi" } exact>
-                    Gradovi
+                    <Gradovi />
                 </Route>
                 <Redirect to={"/login"} />
             </Switch>
-
         )
 
     }

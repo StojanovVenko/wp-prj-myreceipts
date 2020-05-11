@@ -1,13 +1,13 @@
 package com.myreceipts.myreceipts.repository.jpa;
 
 import com.myreceipts.myreceipts.model.Smetka;
-import com.myreceipts.myreceipts.model.dto.SmetkaDto;
-import com.myreceipts.myreceipts.model.vm.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
+import java.awt.*;
+import java.util.Date;
 import java.util.List;
 
 public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
@@ -28,4 +28,61 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             "inner join project.proizvodi as pr on pr.id_proizvod=pns.id_proizvod ", nativeQuery = true)
     List<Object> findSmetkaInfo(Integer id);
 
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween(
+            int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByProdavnica_IdProdavnica(Integer idProdavnica, Pageable req);
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetween(
+            int idGrad, int idProdavnica, Double startPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetween(
+            int idGrad, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+        );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetween (
+    int idGrad, int idProdavnica, Double endPrice, Date startDate, Date endDate, Pageable req
+            );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetween(
+    int idGrad, Double startPrice, Date startDate, Date endDate, Pageable req
+            );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetween(
+            int idGrad, Double endPrice,Date startDate, Date endDate, Pageable req
+        );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetween(
+        int idGrad, int idProdavnica, Date startDate, Date endDate, Pageable req
+            );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndDatumIsBetween(
+            int idGrad, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByDatumIsBetween(
+        Date startDate, Date endDate, Pageable req
+            );
+
+    Page<Smetka> findAllByVkupenPrometIsGreaterThanEqualAndDatumIsBetween(
+            Double startPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByVkupenPrometIsLessThanEqualAndDatumIsBetween(
+            Double endPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByVkupenPrometIsBetweenAndDatumIsBetween(
+            Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findByProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween (
+            int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetween (
+            int idFirma, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+    );
 }

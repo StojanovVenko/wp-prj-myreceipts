@@ -12,9 +12,6 @@ class KreiranjeSmetka extends React.Component {
 
     }
 
-
-
-
     render() {
 
     return(
@@ -33,7 +30,7 @@ class KreiranjeSmetka extends React.Component {
             </div>
         </div>
 
-    )
+        )
     }
 
 }

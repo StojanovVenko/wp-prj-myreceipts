@@ -30,4 +30,9 @@ public class ProdavnicaRepositoryImpl implements ProdavnicaRepository {
     public Optional<Prodavnica> findById(Integer idProdavnica) {
         return this.prodavniciRepository.findById(idProdavnica);
     }
+
+    @Override
+    public List<Prodavnica> findAllProdavnici(Integer idFirma) {
+        return this.prodavniciRepository.findAllByFirma_IdFirma(idFirma);
+    }
 }

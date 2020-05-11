@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import GradoviService from "../../../../../../service/gradoviService";
 import Dropdown from "react-bootstrap/Dropdown";
-import {CustomMenu, CustomToggle} from "./DropdownGradoviCreate/customDropdown";
-import FormControl from "react-bootstrap/FormControl";
+import {CustomMenuGradovi, CustomToggleGradovi} from "../../../GradoviDropdown/gradoviDropdown";
 
 class Gradovi extends React.Component {
     constructor(params){
@@ -54,11 +53,11 @@ class Gradovi extends React.Component {
 
 
         let dropdown = <Dropdown>
-            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+            <Dropdown.Toggle as={CustomToggleGradovi} id="dropdown-custom-components">
                 {this.state.selectedGrad}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu as={CustomMenu}>
+            <Dropdown.Menu as={CustomMenuGradovi}>
                 <div className="input-group ml-3" style={{width: "210px"}}>
                     <input type="text" className="form-control" placeholder="Внеси град"
                            onChange={e => this.setState({grad: e.target.value})}
@@ -82,6 +81,6 @@ class Gradovi extends React.Component {
 
     }
 
-};
+}
 
 export default Gradovi;

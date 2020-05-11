@@ -20,13 +20,13 @@ const Login = () => {
                                 <div className="col-lg-6">
                                     <div className="p-5">
                                         <div className="text-center">
-                                            <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                            <h1 className="h4 text-gray-900 mb-4">Добредојдовте!</h1>
                                         </div>
                                         <form className="user">
                                             <div className="form-group">
                                                 <input type="email" className="form-control form-control-user"
                                                        id="exampleInputEmail" aria-describedby="emailHelp"
-                                                       placeholder="Enter Email Address..."/>
+                                                       placeholder="Внеси Email адреса..."/>
                                             </div>
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user"
@@ -37,7 +37,7 @@ const Login = () => {
                                                     <input type="checkbox" className="custom-control-input"
                                                            id="customCheck"/>
                                                     <label className="custom-control-label" htmlFor="customCheck">
-                                                        Remember Me
+                                                        Запомни ме
                                                     </label>
                                                 </div>
                                             </div>
@@ -55,10 +55,10 @@ const Login = () => {
                                         </form>
                                         <hr />
                                         <div className="text-center">
-                                            <Link to="" className="small" >Forgot Password?</Link>
+                                            <Link to="" className="small" >Заборавена лозинка?</Link>
                                         </div>
                                         <div className="text-center">
-                                            <Link to={"/register"} className="small" >Create an Account!</Link>
+                                            <Link to={"/register"} className="small" >Креирај нов профил!</Link>
                                         </div>
                                     </div>
                                 </div>

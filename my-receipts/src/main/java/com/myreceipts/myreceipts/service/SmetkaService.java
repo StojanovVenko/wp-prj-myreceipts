@@ -12,6 +12,8 @@ public interface SmetkaService {
 
     Page<Smetka> getSmetkiWithProducts(Integer page, Integer size);
 
+    Page<Smetka> getSmetkiWithProductsFiltered(int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice,
+                                  Date startDate, Date endDate);
 
     List<Smetka> findAll();
 

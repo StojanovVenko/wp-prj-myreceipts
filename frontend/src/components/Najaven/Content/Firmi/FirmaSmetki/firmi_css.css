@@ -1,0 +1,13 @@
+#smetkiTable .background{
+    background-color: cornflowerblue !important;
+    color:white
+}
+
+#smetkiTable tr:hover {
+    color: white!important;
+    background-color: lightsteelblue !important;
+}
+
+#smetkiTable > #firstRow {
+
+}

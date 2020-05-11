@@ -26,6 +26,7 @@ class App extends React.Component{
             </Route>
             <Route path={"/"} >
                 <Najaven />
+
             </Route>
         </Switch>
 
