@@ -9,4 +9,6 @@ public interface JpaProdavnicaRepository extends JpaRepository<Prodavnica, Integ
 
     List<Prodavnica> findAllByFirma_IdFirma(Integer idFirma);
 
+    List<Prodavnica> findAllByGrad_IdGrad(Integer idGrad);
+
 }

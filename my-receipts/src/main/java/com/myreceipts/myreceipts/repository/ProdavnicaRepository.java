@@ -14,5 +14,7 @@ public interface ProdavnicaRepository {
 
     Optional<Prodavnica> findById(Integer idProdavnica);
 
-    List<Prodavnica> findAllProdavnici(Integer idFirma);
+    List<Prodavnica> findAllProdavniciVoFirma(Integer idFirma);
+
+    List<Prodavnica> findAllProdavniciVoGrad(Integer idGrad);
 }

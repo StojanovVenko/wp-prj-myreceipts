@@ -48,4 +48,8 @@ public interface SmetkaRepository {
     Page<Smetka> findAllSmetkiWithProductsFilteredInFirma(int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate);
 
     Page<Smetka> findAllSmetkiWithProductsFilteredInFirma(int page, int size, int idFirma, Double startPrice, Double endPrice, Date startDate, Date endDate);
+
+    Page<Smetka> findAllSmetkiWithProductsFilteredInGrad(int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate);
+
+    Page<Smetka> findAllSmetkiWithProductsFilteredInGrad(int page, int size, int idGrad, Double startPrice, Double endPrice, Date startDate, Date endDate);
 }

@@ -147,7 +147,7 @@ const Header = () => {
                                     Поставки
                                 </Link>
                                 <div className="dropdown-divider"/>
-                                <Link to="/odjava" className="dropdown-item">
+                                <Link to="/login" className="dropdown-item">
                                     <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
                                     Одјава
                                 </Link>

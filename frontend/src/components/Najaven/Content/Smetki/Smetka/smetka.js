@@ -58,20 +58,46 @@ const Smetka = (props) => {
                         <Link to={{
                             pathname: `/firmi`,
                             state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                                idProdavnica: -1,
+                                imeProdavnica: "Сите продавници",
+                                idGrad: -1,
+                                imeGrad: "Избери град",
+                                lookFirma: true,
                             firma: props.smetka.prodavnica.firma}
-                        }}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa} tukaa
+                        }}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa}
                         </Link>
-                        {/*<Link to={{*/}
-                        {/*    pathname:`/firmi/${props.smetka.prodavnica.firma.idFirma}`,*/}
-                        {/*    state: {*/}
-                        {/*        idFirma: props.smetka.prodavnica.firma.idFirma*/}
-                        {/*    }*/}
-                        {/*}}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa}*/}
-                        {/*</Link>*/}
-                        - <Link to="#" onClick="">{props.smetka.prodavnica.firma.grad.ime}</Link>
+                        - <Link to={{
+                        pathname: `/firmi`,
+                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                            idProdavnica: -1,
+                            imeProdavnica: "Сите продавници",
+                            idGrad: props.smetka.prodavnica.firma.grad.idGrad,
+                            imeGrad: props.smetka.prodavnica.firma.grad.ime,
+                            lookFirma: false,
+                            firma: props.smetka.prodavnica.firma}
+                    }}>{props.smetka.prodavnica.firma.grad.ime}</Link>
                         <br/>
-                        Продавница: <Link to="#" onClick=""> {props.smetka.prodavnica.ime}, {props.smetka.prodavnica.adresa}</Link>
-                        - <Link to="#" onClick="">{props.smetka.prodavnica.grad.ime}</Link>
+                        Продавница: <Link to={{
+                        pathname: `/firmi`,
+                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                            idProdavnica: props.smetka.prodavnica.idProdavnica,
+                            imeProdavnica: props.smetka.prodavnica.ime,
+                            idGrad: -1,
+                            imeGrad: "Избери град",
+                            lookFirma: true,
+                            firma: props.smetka.prodavnica.firma}
+                    }}> {props.smetka.prodavnica.ime}, {props.smetka.prodavnica.adresa}</Link>
+                        -
+                        <Link to={{
+                        pathname: `/firmi`,
+                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                            idProdavnica: -1,
+                            imeProdavnica: "Сите продавници",
+                            idGrad: props.smetka.prodavnica.grad.idGrad,
+                            imeGrad: props.smetka.prodavnica.grad.ime,
+                            lookFirma: false,
+                            firma: props.smetka.prodavnica.firma}
+                    }}>{props.smetka.prodavnica.grad.ime}</Link>
 
                         <br/>
                         Даночен број: {props.smetka.danochenBroj}

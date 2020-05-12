@@ -14,6 +14,9 @@ const Gradovi = {
                 'content-type': 'application/json'
             }
         });
+    },
+    getAllProdavniciVoGrad: (idGrad) => {
+        return apiUtils.get(`/api/gradovi/${idGrad}/prodavnici`);
     }
 
 };

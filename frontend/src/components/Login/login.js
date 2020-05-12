@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const Login = () => {
 
     return (
-        <div className="container">
+        <div className="container pt-5 pb-5">
 
             {/*// <!-- Outer Row -->*/}
             <div className="row justify-content-center">
@@ -19,18 +19,18 @@ const Login = () => {
                                 <div className="col-lg-6 d-none d-lg-block bg-login-image"/>
                                 <div className="col-lg-6">
                                     <div className="p-5">
-                                        <div className="text-center">
+                                        <div className="text-center pt-3 pb-3">
                                             <h1 className="h4 text-gray-900 mb-4">Добредојдовте!</h1>
                                         </div>
                                         <form className="user">
                                             <div className="form-group">
                                                 <input type="email" className="form-control form-control-user"
                                                        id="exampleInputEmail" aria-describedby="emailHelp"
-                                                       placeholder="Внеси Email адреса..."/>
+                                                       placeholder="Е-пошта"/>
                                             </div>
                                             <div className="form-group">
                                                 <input type="password" className="form-control form-control-user"
-                                                       id="exampleInputPassword" placeholder="Password"/>
+                                                       id="exampleInputPassword" placeholder="Лозинка"/>
                                             </div>
                                             <div className="form-group">
                                                 <div className="custom-control custom-checkbox small">
@@ -42,24 +42,19 @@ const Login = () => {
                                                 </div>
                                             </div>
                                             <Link to={"/pochetna"} className="btn btn-primary btn-user btn-block">
-                                                Login
+                                                Најави се
                                             </Link>
-                                            <hr />
-                                            <Link to="" className="btn btn-google btn-user btn-block">
-                                                <i className="fab fa-google fa-fw"/> Login with Google
+                                            <Link to={"/register"} className="btn btn-light btn-user btn-block">
+                                                Регистрација
                                             </Link>
-                                            <Link to="" className="btn btn-facebook btn-user btn-block">
-                                                <i className="fab fa-facebook-f fa-fw"/>
-                                                Login with Facebook
-                                            </Link>
+
+
                                         </form>
                                         <hr />
                                         <div className="text-center">
                                             <Link to="" className="small" >Заборавена лозинка?</Link>
                                         </div>
-                                        <div className="text-center">
-                                            <Link to={"/register"} className="small" >Креирај нов профил!</Link>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

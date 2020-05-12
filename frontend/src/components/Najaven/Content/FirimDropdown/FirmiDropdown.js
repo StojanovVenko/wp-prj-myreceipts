@@ -6,7 +6,7 @@ import FormControl from "react-bootstrap/FormControl";
 
 export const CustomToggleFirmi = React.forwardRef(({ children, onClick, disabled }, ref) => (
     <button
-        className={"btn btn-primary"}
+        className={"btn btn-primary btn-block"}
         ref={ref}
         disabled={disabled}
         onClick={e => {

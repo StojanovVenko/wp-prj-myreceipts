@@ -85,4 +85,12 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
     Page<Smetka> findAllByProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetween (
             int idFirma, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
     );
+
+    Page<Smetka> findByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween(
+            int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+    );
+
+    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetween (
+            int idGrad, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+    );
 }

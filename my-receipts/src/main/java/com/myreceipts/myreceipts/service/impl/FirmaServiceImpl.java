@@ -21,51 +21,51 @@ import java.util.Optional;
 @Service
 public class FirmaServiceImpl implements FirmaService {
 
-    private final FirmaRepository firmaRepository;
-    private final GradRepository gradRepository;
-    private final SmetkaRepository smetkaRepository;
-    private final ProdavnicaRepository prodavnicaRepository;
+	private final FirmaRepository firmaRepository;
+	private final GradRepository gradRepository;
+	private final SmetkaRepository smetkaRepository;
+	private final ProdavnicaRepository prodavnicaRepository;
 
-    public FirmaServiceImpl(FirmaRepository firmaRepository, GradRepository gradRepository, SmetkaRepository smetkaRepository, ProdavnicaRepository prodavnicaRepository) {
-        this.firmaRepository = firmaRepository;
-        this.gradRepository = gradRepository;
-        this.smetkaRepository = smetkaRepository;
-        this.prodavnicaRepository = prodavnicaRepository;
-    }
+	public FirmaServiceImpl(FirmaRepository firmaRepository, GradRepository gradRepository, SmetkaRepository smetkaRepository, ProdavnicaRepository prodavnicaRepository) {
+		this.firmaRepository = firmaRepository;
+		this.gradRepository = gradRepository;
+		this.smetkaRepository = smetkaRepository;
+		this.prodavnicaRepository = prodavnicaRepository;
+	}
 
-    @Override
-    public Firma createFirma(String ime, String adresa, Integer idGrad) {
-        Firma firma = new Firma();
-        firma.setIme(ime);
-        firma.setAdresa(adresa);
+	@Override
+	public Firma createFirma(String ime, String adresa, Integer idGrad) {
+		Firma firma = new Firma();
+		firma.setIme(ime);
+		firma.setAdresa(adresa);
 
-        Grad grad = this.gradRepository.findById(idGrad)
-                .orElseThrow(() -> new NoSuchElementException("Ne postoi grad so id:" + idGrad));
+		Grad grad = this.gradRepository.findById(idGrad)
+				.orElseThrow(() -> new NoSuchElementException("Ne postoi grad so id:" + idGrad));
 
-        firma.setGrad(grad);
-        return this.firmaRepository.save(firma);
-    }
+		firma.setGrad(grad);
+		return this.firmaRepository.save(firma);
+	}
 
-    @Override
-    public List<Firma> findAll() {
-        return this.firmaRepository.findAll();
-    }
+	@Override
+	public List<Firma> findAll() {
+		return this.firmaRepository.findAll();
+	}
 
-    @Override
-    public Page<Smetka> findAllSmetkiInFirma(int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
-        if(idProdavnica != Constants.none){
-            return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(page, size, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate);
-        }
-        return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(page, size, idFirma, startPrice, endPrice, startDate, endDate);
-    }
+	@Override
+	public Page<Smetka> findAllSmetkiInFirma(int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
+		if(idProdavnica != Constants.none){
+			return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(page, size, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate);
+		}
+		return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(page, size, idFirma, startPrice, endPrice, startDate, endDate);
+	}
 
-    @Override
-    public Optional<Firma> findById(int idFirma) {
-        return this.firmaRepository.findById(idFirma);
-    }
+	@Override
+	public Optional<Firma> findById(int idFirma) {
+		return this.firmaRepository.findById(idFirma);
+	}
 
-    @Override
-    public List<Prodavnica> getAllProdavnici(Integer idFirma) {
-        return this.prodavnicaRepository.   findAllProdavnici(idFirma);
-    }
+	@Override
+	public List<Prodavnica> getAllProdavnici(Integer idFirma) {
+		return this.prodavnicaRepository.findAllProdavniciVoFirma(idFirma);
+	}
 }

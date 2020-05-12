@@ -32,7 +32,12 @@ public class ProdavnicaRepositoryImpl implements ProdavnicaRepository {
     }
 
     @Override
-    public List<Prodavnica> findAllProdavnici(Integer idFirma) {
+    public List<Prodavnica> findAllProdavniciVoFirma(Integer idFirma) {
         return this.prodavniciRepository.findAllByFirma_IdFirma(idFirma);
+    }
+
+    @Override
+    public List<Prodavnica> findAllProdavniciVoGrad(Integer idGrad) {
+        return this.prodavniciRepository.findAllByGrad_IdGrad(idGrad);
     }
 }

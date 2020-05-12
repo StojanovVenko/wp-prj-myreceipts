@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const CustomPicker = (props) => {
+const  CustomPicker = (props) => {
 
     const [startDate, setStartDate] = useState(props.startDate);
     const [endDate, setEndDate] = useState(props.endDate);
@@ -19,25 +19,22 @@ const CustomPicker = (props) => {
 
     return (
         <div>
+            Изберете временски период<br/>
             <DatePicker
-                className="form-control"
+                className="form-control mb-2 text-center"
                 selected={startDate}
                 onChange={date => {
-                    // setStartDate(date);
                 changeStartDate(date)}}
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
             />
-            {/*<br/>*/}
-            <br/>
             <br/>
 
             <DatePicker
-                className="form-control"
+                className="form-control text-center"
                 selected={endDate}
                 onChange={date => {
-                    // setEndDate(date);
                     changeEndDate(date);}}
                 selectsEnd
                 startDate={startDate}

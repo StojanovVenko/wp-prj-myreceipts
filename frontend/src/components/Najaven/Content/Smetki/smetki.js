@@ -60,7 +60,6 @@ class Smetki extends React.Component {
     };
 
     loadByDatum(start, end) {
-        console.log("here ok");
         SmetkiService.getSmetkiSoProduktiSoFiltri(this.state.page, this.state.pageSize, this.state.idGrad, this.state.idProdavnica,
             this.state.minIznos, this.state.maxIznos, start, end)
             .then(response => {

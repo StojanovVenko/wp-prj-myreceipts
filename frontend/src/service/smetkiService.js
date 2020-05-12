@@ -48,9 +48,23 @@ const Smetki = {
                 'page-size': size
             }
         });
+    },
+
+    getSmetkiSoProduktiSoFiltriZaGrad: (page, size, idGrad, idProdavnica, startPrice, endPrice, satartDate, endDate) => {
+        return axios.get(`/api/gradovi/${idGrad}/smetki`, {
+            params: {
+                pr: idProdavnica,
+                sp: startPrice,
+                ep: endPrice,
+                sd: satartDate,
+                ed: endDate
+            },
+            headers: {
+                'page':page,
+                'page-size': size
+            }
+        });
     }
-// }?page=${page}&size=${size}&gr=
-// ${idGrad}&pr=${idProdavnica}&sp=${startPrice}&ep=${endPrice}&sd=${satartDate}&ed=${endDate}`);
 
 };
 export default Smetki;

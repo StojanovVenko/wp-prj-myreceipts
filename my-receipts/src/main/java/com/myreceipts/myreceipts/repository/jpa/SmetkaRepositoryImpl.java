@@ -214,6 +214,30 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
     }
 
     @Override
+    public Page<Smetka> findAllSmetkiWithProductsFilteredInGrad(int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
+        org.springframework.data.domain.Page<Smetka> result =
+                this.repository.findByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween(
+                        idGrad, idProdavnica, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
+                );
+        return new Page<>(page,
+                result.getTotalPages(),
+                size,
+                result.getContent());
+    }
+
+    @Override
+    public Page<Smetka> findAllSmetkiWithProductsFilteredInGrad(int page, int size, int idGrad, Double startPrice, Double endPrice, Date startDate, Date endDate) {
+        org.springframework.data.domain.Page<Smetka> result =
+                this.repository.findAllByProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetween(
+                        idGrad, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
+                );
+        return new Page<>(page,
+                result.getTotalPages(),
+                size,
+                result.getContent());
+    }
+
+    @Override
     public Page<Smetka> findAllSmetkiWithProductsFiltered(int page, int size, int idGrad, Date startDate,
                                                           Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
