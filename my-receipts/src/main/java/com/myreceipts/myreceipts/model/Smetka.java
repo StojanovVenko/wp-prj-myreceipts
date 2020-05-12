@@ -45,4 +45,8 @@ public class Smetka implements Serializable {
     @JoinColumn(name = "id_prodavnica", nullable = false)
     private Prodavnica prodavnica;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_user")
+    private User user;
+
 }
