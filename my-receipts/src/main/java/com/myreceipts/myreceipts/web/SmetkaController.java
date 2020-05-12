@@ -38,11 +38,11 @@ public class SmetkaController {
         return this.smetkaService.getSmetkaInfo(id);
     }
 
-//    @GetMapping
-//    public Page<Smetka> getSmetkiWithProducts(@RequestHeader(name = "page", defaultValue = "0", required = false) int page,
-//                                                @RequestHeader(name = "page-size", defaultValue = "10", required = false) int size) {
-//        return this.smetkaService.getSmetkiWithProducts(page, size);
-//    }
+    @GetMapping(path = "/all")
+    public Page<Smetka> getSmetkiWithProducts(@RequestHeader(name = "page", defaultValue = "0", required = false) int page,
+                                                @RequestHeader(name = "page-size", defaultValue = "10", required = false) int size) {
+        return this.smetkaService.getSmetkiWithProducts(page, size);
+    }
 
     @GetMapping
     public Page<Smetka> getSmetkiWithProductsFiltered(@RequestHeader(name = "page", defaultValue = "0", required = false) int page,

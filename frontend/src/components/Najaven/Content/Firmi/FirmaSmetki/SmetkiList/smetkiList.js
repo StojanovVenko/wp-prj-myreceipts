@@ -1,8 +1,5 @@
 import React, {useState} from "react";
-import SmetkiService from "../../../../../../service/smetkiService";
-import {Link} from "react-router-dom";
 import "./../firmi_css.css"
-import ReactPaginate from "react-paginate";
 import Pagination from "../Pagination/pagination";
 
 const SmetkiList = (props) => {

@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import SmetkiService from "../../../../service/smetkiService";
 import GradoviService from "../../../../service/gradoviService";
 import FirmiService from "../../../../service/firmiService";
@@ -162,6 +161,8 @@ class Smetki extends React.Component {
     render() {
 
         const dodadiSmetki = () => {
+            console.log("SMETKI--------");
+            console.log(this.state.smetki);
             return this.state.smetki.map((smetka, index) => {
                 return <Smetka smetka={smetka} index={index} prikazhi="colapse hide"/>
             });

@@ -1,5 +1,6 @@
 package com.myreceipts.myreceipts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +46,7 @@ public class Smetka implements Serializable {
     @JoinColumn(name = "id_prodavnica", nullable = false)
     private Prodavnica prodavnica;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
