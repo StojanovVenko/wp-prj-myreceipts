@@ -15,7 +15,7 @@ public interface FirmaService {
 
     List<Firma> findAll();
 
-    Page<Smetka> findAllSmetkiInFirma(int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate);
+    Page<Smetka> findAllSmetkiInFirma(Long idUser, int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate);
 
     Optional<Firma> findById(int idFirma);
 

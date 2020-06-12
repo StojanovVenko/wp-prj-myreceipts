@@ -3,14 +3,17 @@ package com.myreceipts.myreceipts.web;
 import com.myreceipts.myreceipts.model.Role;
 import com.myreceipts.myreceipts.model.RoleName;
 import com.myreceipts.myreceipts.model.User;
+import com.myreceipts.myreceipts.model.dto.UserDetailsDto;
 import com.myreceipts.myreceipts.model.exceptions.AppException;
 import com.myreceipts.myreceipts.payload.ApiResponse;
 import com.myreceipts.myreceipts.payload.JwtAuthenticationResponse;
+import com.myreceipts.myreceipts.payload.LoginRequest;
 import com.myreceipts.myreceipts.payload.SignUpRequest;
 import com.myreceipts.myreceipts.repository.RoleRepository;
 import com.myreceipts.myreceipts.repository.UserRepository;
+import com.myreceipts.myreceipts.security.CurrentUser;
 import com.myreceipts.myreceipts.security.JwtTokenProvider;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.myreceipts.myreceipts.security.UserPrincipal;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -101,6 +104,15 @@ public class AuthController {
                 .buildAndExpand(result.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+    }
+
+    @GetMapping("/me")
+    public UserDetailsDto getUserDetails(@CurrentUser UserPrincipal userPrincipal) {
+        UserDetailsDto dto = new UserDetailsDto();
+        dto.setMail(userPrincipal.getEmail());
+        dto.setName(userPrincipal.getName());
+        dto.setUsername(userPrincipal.getUsername());
+        return dto;
     }
 
 }

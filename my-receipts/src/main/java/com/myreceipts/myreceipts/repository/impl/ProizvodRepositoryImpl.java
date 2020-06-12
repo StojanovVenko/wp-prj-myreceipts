@@ -1,7 +1,8 @@
-package com.myreceipts.myreceipts.repository.jpa;
+package com.myreceipts.myreceipts.repository.impl;
 
 import com.myreceipts.myreceipts.model.Proizvod;
 import com.myreceipts.myreceipts.repository.ProizvodRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaProizvodiRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

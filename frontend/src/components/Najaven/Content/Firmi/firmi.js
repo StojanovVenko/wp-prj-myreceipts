@@ -9,6 +9,9 @@ import {CustomMenuProdavnici, CustomToggleProdavnici} from "../ProdavniciDropdow
 import CustomPicker from "../Smetki/Picker/picker";
 import {CustomMenuGradovi, CustomToggleGradovi} from "../GradoviDropdown/gradoviDropdown";
 import GradoviService from "../../../../service/gradoviService";
+import Loader from 'react-loader-spinner';
+import ProizvodiNaSmetkiService from "../../../../service/proizvodiNaSmetkaService";
+import ProizvodiNaSmetki from "./ProizvodiNaSmetki/proizvodiNaSmetki";
 
 class Firmi extends React.Component {
 
@@ -16,31 +19,34 @@ class Firmi extends React.Component {
         super(props);
 
         this.state = {
-            idFirma: props.location.state.firma.idFirma,
-            imeFirma: props.location.state.firma.ime,
-            imeFirmaGrad: props.location.state.firma.grad.ime,
+            idFirma: props.location.state !== undefined ? props.location.state.firma.idFirma : -1,
+            imeFirma: props.location.state !==undefined ? props.location.state.firma.ime: "Избери фирма",
+            imeFirmaGrad: props.location.state !==undefined ? props.location.state.firma.grad.ime : "",
             listSmetki: [],
             smetkiPage:0,
             smetkiPageSize: 5,
             smetkiTotalPages: 0,
 
-            idProdavnica: props.location.state.idProdavnica,
-            imeProdavnica: props.location.state.imeProdavnica,
+            idProdavnica: props.location.state !== undefined? props.location.state.idProdavnica : -1,
+            imeProdavnica: props.location.state !== undefined? props.location.state.imeProdavnica: "Избери продавница",
 
-            minPrice: -1,
-            maxPrice: 1000000,
-            startDate: new Date("2020/01/01"),
+            minPrice: props.minPrice,
+            maxPrice: props.maxPrice,
+            startDate: props.startDate,
 
-            endDate: new Date(),
+            endDate: props.endDate,
+
+            listProizvodiNaSmetki: [],
 
 
             listFirmi: [],
             listProdavnici: [],
 
-            lookFirma: props.location.state.lookFirma, //ako e true togas se listat firmi ako e false se listat gradovi
-            imeGrad: props.location.state.imeGrad,
-            idGrad: props.location.state.idGrad,
-            listGradovi: []
+            lookFirma: props.location.state !==undefined ? props.location.state.lookFirma : -1, //ako e true togas se listat firmi ako e false se listat gradovi
+            imeGrad: props.location.state !==undefined ? props.location.state.imeGrad : "Избери град",
+            idGrad: props.location.state !==undefined ? props.location.state.idGrad : -1,
+            listGradovi: [],
+            isLoading: true
         }
 
     }
@@ -66,11 +72,31 @@ class Firmi extends React.Component {
     loadlistSmetkiVoGrad(page=0, pageSize=this.state.smetkiPageSize, idProdavnica=this.state.idProdavnica,
                        imeProdavnica=this.state.imeProdavnica, idGrad=this.state.idGrad,
                        imeGrad=this.state.imeGrad){
+        this.setState({
+            loading: true
+        });
         let prodavnici = [];
         GradoviService.getAllProdavniciVoGrad(idGrad)
             .then(response => {
                 prodavnici = response.data
             }).catch();
+
+        let proizvodiNaSmetki = [];
+        if(idProdavnica !== -1){
+            ProizvodiNaSmetkiService.getStatsForProizvodiInProdavnica(idProdavnica, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        } else if(idGrad !== -1){
+            ProizvodiNaSmetkiService.getStatsForProizvodiInCity(idGrad, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        }
 
         SmetkiService.getSmetkiSoProduktiSoFiltriZaGrad(page, pageSize, idGrad, idProdavnica,
             this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
@@ -85,10 +111,36 @@ class Firmi extends React.Component {
                     idProdavnica: idProdavnica,
                     imeProdavnica: imeProdavnica,
                     listProdavnici: prodavnici,
-                    lookFirma: false
+                    listProizvodiNaSmetki: proizvodiNaSmetki,
+                    lookFirma: false,
+                    isLoading: false
                 });
                 this.removeSelectedListItemBackground();
+                console.log(this.state.listProizvodiNaSmetki);
+
             }).catch();
+    }
+
+    loadProizvodiNaSmetkiVoFirma(idFirma) {
+        let data = [];
+        ProizvodiNaSmetkiService.getStatsForProizvodiInFirma(idFirma, this.state.minPrice,
+            this.state.maxPrice, this.state.startDate, this.state.endDate)
+            .then(response => {
+                data = response.data;
+            })
+            .catch();
+        return data;
+    }
+
+    loadProizvodiNaSmetkiVoGrad(idGrad) {
+        let data = [];
+        ProizvodiNaSmetkiService.getStatsForProizvodiInCity(idGrad, this.state.minPrice,
+            this.state.maxPrice, this.state.startDate, this.state.endDate)
+            .then(response => {
+                data = response.data;
+            })
+            .catch();
+        return data;
     }
 
 
@@ -96,11 +148,32 @@ class Firmi extends React.Component {
     loadlistSmetkiVoFirma(page=0, pageSize=this.state.smetkiPageSize, idProdavnica=this.state.idProdavnica,
                           imeProdavnica=this.state.imeProdavnica, idFirma=this.state.idFirma,
                           imeFirma=this.state.imeFirma, imeFirmaGrad=this.state.imeFirmaGrad) {
+        this.setState({
+            isLoading: true
+        });
+
         let prodavnici = [];
         FirmiService.getAllProdavniciVoFirma(idFirma)
             .then(response => {
                 prodavnici = response.data;
             }).catch();
+
+        let proizvodiNaSmetki = [];
+        if(idProdavnica !== -1){
+            ProizvodiNaSmetkiService.getStatsForProizvodiInProdavnica(idProdavnica, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        } else if (idFirma !== -1){
+            ProizvodiNaSmetkiService.getStatsForProizvodiInFirma(idFirma, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        }
 
             SmetkiService.getSmetkiSoProduktiSoFiltriZaFirma(page, pageSize, idFirma, idProdavnica,
             this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
@@ -116,13 +189,38 @@ class Firmi extends React.Component {
                     idProdavnica: idProdavnica,
                     imeProdavnica: imeProdavnica,
                     listProdavnici: prodavnici,
-                    lookFirma:true
+                    listProizvodiNaSmetki: proizvodiNaSmetki,
+                    lookFirma:true,
+                    isLoading: false
                 });
                 this.removeSelectedListItemBackground();
             }).catch();
     }
 
     loadByDatum(start, end) {
+        let proizvodiNaSmetki = [];
+        if(this.state.idProdavnica !== -1) {
+            ProizvodiNaSmetkiService.getStatsForProizvodiInProdavnica(this.state.idProdavnica, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        } else if(this.state.lookFirma) {
+            ProizvodiNaSmetkiService.getStatsForProizvodiInFirma(this.state.idFirma, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        } else {
+            ProizvodiNaSmetkiService.getStatsForProizvodiInCity(this.state.idGrad, this.state.minPrice,
+                this.state.maxPrice, this.state.startDate, this.state.endDate)
+                .then(response => {
+                    proizvodiNaSmetki = response.data;
+                })
+                .catch();
+        }
         if(this.state.lookFirma){
             SmetkiService.getSmetkiSoProduktiSoFiltriZaFirma(this.state.smetkiPage, this.state.smetkiPageSize, this.state.idFirma, this.state.idProdavnica,
                 this.state.minPrice, this.state.maxPrice, start, end)
@@ -201,10 +299,11 @@ class Firmi extends React.Component {
         if (parseFloat(e) > parseFloat(this.state.maxPrice)) {
             this.setState({
                 minPrice: e,
-                maxPrice: e
+                maxPrice: e,
+                isLoading: true
             })
         } else {
-            this.setState({minPrice: e});
+            this.setState({minPrice: e, isLoading: true});
         }
     };
 
@@ -212,10 +311,10 @@ class Firmi extends React.Component {
         if (parseFloat(e) < parseFloat(this.state.minPrice)) {
             this.setState({
                 maxPrice: e,
-                minPrice: e
+                minPrice: e, isLoading: true
             })
         } else {
-            this.setState({maxPrice: e});
+            this.setState({maxPrice: e, isLoading: true});
         }
     };
 
@@ -343,16 +442,16 @@ class Firmi extends React.Component {
               <input type="range"
                      onChange={changeEvent => this.changeMinValue(changeEvent.target.value)}
                      onClick={() => this.loadSmetki()}
-                     min="0"
-                     max="1000000"
-                     step="100"
+                     min={this.props.minPrice}
+                     max={this.props.maxPrice}
+                     step="1"
                      value={this.state.minPrice}
                      className="slider" id="myRange"/>
               <input type="range"
                      onChange={changeEvent => this.changeMaxValue(changeEvent.target.value)}
-                     min="0"
-                     max="1000000"
-                     step="100"
+                     min={this.props.minPrice}
+                     max={this.props.maxPrice}
+                     step="1"
                      value={this.state.maxPrice}
                      onClick={() => {
                          this.loadSmetki()
@@ -366,8 +465,20 @@ class Firmi extends React.Component {
         };
 
         const firmiSmetki = () => {
+
+            if (this.state.isLoading) return <Loader
+                type="TailSpin"
+                color="#00BFFF"
+                height={150}
+                width={300}
+                timeout={300000} //3 secs
+
+            />;
+
             if(this.state.listSmetki.length===0)
-                return <h1 className="display-4">Не се пронајдени фискални сметки...</h1>
+                return <div className="alert alert-primary" role="alert">
+                    <h3 >Не се пронајдени фискални сметки...</h3>
+                </div>
             return <FirmaSmetki
                 listSmetki={this.state.listSmetki}
                 page={this.state.smetkiPage}
@@ -375,6 +486,7 @@ class Firmi extends React.Component {
                 totalPages={this.state.smetkiTotalPages}
                 changePageSize={this.changePageSize}
                 getNewPage={this.getNewPageSmetki}
+                isLoading={this.state.isLoading}
             />;
         };
 
@@ -410,10 +522,12 @@ class Firmi extends React.Component {
                 </div>
 
                 <hr/>
+                <div className="container">
                 <div className="mb-3">
                     {firmiSmetki()}
                 </div>
-                <hr/>
+                </div>
+
             </>
         )
     }

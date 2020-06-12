@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import SmetkaDetails from "./SmetkaDetails/smetkaDetails";
 import SmetkiService from "../../../../../service/smetkiService";
 import SmetkiList from "./SmetkiList/smetkiList";
+import Loader from "react-loader-spinner";
 
 const FirmaSmetki = (props) => {
 
     let [smetka, setSmetka] = useState(undefined);
     let [proizvodi, setProizvodi] = useState([]);
-
 
     const showDetails = (smetka) => {
         if (smetka === undefined) {
@@ -36,7 +36,7 @@ const FirmaSmetki = (props) => {
             </div>
             <div className="col-xl-4 ">
                 <SmetkaDetails smetkaProps={smetka}
-                               proizvodiProps={proizvodi} />
+                               proizvodiProps={proizvodi}/>
             </div>
 
         </div>);

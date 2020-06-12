@@ -1,5 +1,6 @@
 import apiUtils from "../util/apiUtils";
 import axios from "../custom-axios/axios";
+import {ACCESS_TOKEN} from "../constants";
 
 
 const Gradovi = {
@@ -9,8 +10,10 @@ const Gradovi = {
     },
 
     addGrad: (param) => {
-        return axios.post("/api/gradovi", param, {
+        const data = JSON.stringify(param);
+        return axios.post("/api/gradovi", data, {
             headers: {
+                Authorization: token(),
                 'content-type': 'application/json'
             }
         });
@@ -20,5 +23,13 @@ const Gradovi = {
     }
 
 };
+
+function token() {
+    if(localStorage.getItem(ACCESS_TOKEN)) {
+        return 'Bearer ' + localStorage.getItem(ACCESS_TOKEN);
+    }
+    return '';
+}
+
 export default Gradovi;
 

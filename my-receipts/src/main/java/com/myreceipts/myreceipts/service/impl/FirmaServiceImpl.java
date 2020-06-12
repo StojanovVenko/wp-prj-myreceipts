@@ -52,11 +52,11 @@ public class FirmaServiceImpl implements FirmaService {
 	}
 
 	@Override
-	public Page<Smetka> findAllSmetkiInFirma(int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
+	public Page<Smetka> findAllSmetkiInFirma(Long idUser, int page, int size, int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
 		if(idProdavnica != Constants.none){
-			return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(page, size, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate);
+			return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(idUser, page, size, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate);
 		}
-		return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(page, size, idFirma, startPrice, endPrice, startDate, endDate);
+		return smetkaRepository.findAllSmetkiWithProductsFilteredInFirma(idUser, page, size, idFirma, startPrice, endPrice, startDate, endDate);
 	}
 
 	@Override

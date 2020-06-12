@@ -1,5 +1,6 @@
 import apiUtils from "../util/apiUtils";
 import axios from "../custom-axios/axios";
+import {ACCESS_TOKEN} from "../constants";
 
 
 const Smetki = {
@@ -8,11 +9,24 @@ const Smetki = {
         return apiUtils.get(`/api/smetki/${id}`);
     },
 
+    getMinMaxIznosAndDateForSmetka: (id) => {
+        return apiUtils.get(`/api/smetki/user/min-max`);
+    },
+
     getSmetkiSoProdukti:(page,pageSize)=>{
         return axios.get(`/api/smetki`,{
             headers: {
+                Authorization: token(),
                 'page':page,
                 'page-size':pageSize
+            }
+        })
+    },
+
+    getInfoZaPoslednaNedela:(page,pageSize)=>{
+        return axios.get(`/api/smetki/last-seven-days`,{
+            headers: {
+                Authorization: token(),
             }
         })
     },
@@ -28,6 +42,7 @@ const Smetki = {
                 ed: endDate
             },
             headers: {
+                Authorization: token(),
                 'page':page,
                 'page-size': size
             }
@@ -44,6 +59,7 @@ const Smetki = {
                 ed: endDate
             },
             headers: {
+                Authorization: token(),
                 'page':page,
                 'page-size': size
             }
@@ -60,6 +76,7 @@ const Smetki = {
                 ed: endDate
             },
             headers: {
+                Authorization: token(),
                 'page':page,
                 'page-size': size
             }
@@ -67,4 +84,11 @@ const Smetki = {
     }
 
 };
+
+function token() {
+    if(localStorage.getItem(ACCESS_TOKEN)) {
+        return 'Bearer ' + localStorage.getItem(ACCESS_TOKEN);
+    }
+    return '';
+}
 export default Smetki;

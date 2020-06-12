@@ -1,7 +1,8 @@
-package com.myreceipts.myreceipts.repository.jpa;
+package com.myreceipts.myreceipts.repository.impl;
 
 import com.myreceipts.myreceipts.model.Grad;
 import com.myreceipts.myreceipts.repository.GradRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaGradRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

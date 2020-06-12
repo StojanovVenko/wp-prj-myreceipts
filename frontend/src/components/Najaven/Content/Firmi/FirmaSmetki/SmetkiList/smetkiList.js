@@ -59,9 +59,13 @@ const SmetkiList = (props) => {
                     props.showDetails({smetka});
                     changeBackground("tr"+index)} }
             >
-                <td>{smetka.prodavnica.grad.ime}</td>
-                <td>{smetka.prodavnica.ime}</td>
-                <td>{smetka.datum}</td>
+                <td>{smetka.prodavnica.grad.ime.slice(0,1).toUpperCase()}{smetka.prodavnica.grad.ime.slice(1).toLowerCase()}</td>
+                <td>{smetka.prodavnica.ime.slice(0,1).toUpperCase()}{smetka.prodavnica.ime.slice(1).toLowerCase()}</td>
+                <td> {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit"
+                }).format(new Date(smetka.datum))}</td>
                 <td>{smetka.vkupenPromet}</td>
             </tr>;
         });

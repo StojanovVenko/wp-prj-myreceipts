@@ -1,8 +1,9 @@
-package com.myreceipts.myreceipts.repository.jpa;
+package com.myreceipts.myreceipts.repository.impl;
 
 import com.myreceipts.myreceipts.model.Role;
 import com.myreceipts.myreceipts.model.RoleName;
 import com.myreceipts.myreceipts.repository.RoleRepository;
+import com.myreceipts.myreceipts.repository.jpa.JpaRoleRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

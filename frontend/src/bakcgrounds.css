@@ -1,0 +1,9 @@
+.bg-custom-login-image {
+  background: url('login.jpg') center;
+  background-size: cover;
+}
+
+.bg-custom-register-image {
+  background: url('register.jpg') center;
+  background-size: cover;
+}

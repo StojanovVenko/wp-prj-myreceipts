@@ -40,11 +40,11 @@ public class GradServiceImpl implements GradService {
     }
 
     @Override
-    public Page<Smetka> findAllSmetkiInGrad(int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
+    public Page<Smetka> findAllSmetkiInGrad(Long idUser, int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate) {
         if(idProdavnica != Constants.none){
-            return smetkaRepository.findAllSmetkiWithProductsFilteredInGrad(page, size, idGrad, idProdavnica, startPrice, endPrice, startDate, endDate);
+            return smetkaRepository.findAllSmetkiWithProductsFilteredInGrad(idUser, page, size, idGrad, idProdavnica, startPrice, endPrice, startDate, endDate);
         }
-        return smetkaRepository.findAllSmetkiWithProductsFilteredInGrad(page, size, idGrad, startPrice, endPrice, startDate, endDate);
+        return smetkaRepository.findAllSmetkiWithProductsFilteredInGrad(idUser, page, size, idGrad, startPrice, endPrice, startDate, endDate);
 
     }
 

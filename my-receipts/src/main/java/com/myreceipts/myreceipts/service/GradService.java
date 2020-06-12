@@ -15,7 +15,7 @@ public interface GradService {
 
     Grad createGrad(String imeGrad);
 
-    Page<Smetka> findAllSmetkiInGrad(int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate);
+    Page<Smetka> findAllSmetkiInGrad(Long idUser,int page, int size, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate);
 
     List<Prodavnica> getAllProdavnici(Integer idGrad);
 }

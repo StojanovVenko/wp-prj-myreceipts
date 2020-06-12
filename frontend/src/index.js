@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.css';
-import 'jquery/dist/jquery';
-import 'bootstrap/dist/js/bootstrap.min';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'font-awesome/css/font-awesome.css';
+// import 'jquery/dist/jquery';
+// import 'bootstrap/dist/js/bootstrap.min';
+ // import 'startbootstrap-sb-admin-2/'
+
+import 'startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css';
+import 'startbootstrap-sb-admin-2/css/sb-admin-2.min.css';
+import 'startbootstrap-sb-admin-2/vendor/jquery/jquery.min';
+import 'startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min';
+import 'startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min';
+
 import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(

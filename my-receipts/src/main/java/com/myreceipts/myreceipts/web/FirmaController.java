@@ -4,8 +4,11 @@ import com.myreceipts.myreceipts.model.Firma;
 import com.myreceipts.myreceipts.model.Prodavnica;
 import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.vm.Page;
+import com.myreceipts.myreceipts.security.CurrentUser;
+import com.myreceipts.myreceipts.security.UserPrincipal;
 import com.myreceipts.myreceipts.service.FirmaService;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "/api/firmi", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 @CrossOrigin(origins = "http://localhost:3000")
+@Secured("ROLE_USER")
 public class FirmaController {
 
     private final FirmaService firmaService;
@@ -42,7 +46,8 @@ public class FirmaController {
     }
 
     @GetMapping(path = "/{idFirma}/smetki")
-    public Page<Smetka> findAllOdFirma(@RequestHeader(name = "page", defaultValue = "0", required = false) int page,
+    public Page<Smetka> findAllOdFirma(@CurrentUser UserPrincipal userPrincipal,
+                                       @RequestHeader(name = "page", defaultValue = "0", required = false) int page,
                                        @RequestHeader(name = "page-size", defaultValue = "10", required = false) int size,
                                        @PathVariable(name = "idFirma") int idFirma,
                                        @RequestParam(name = "pr", required = false) int idProdavnica,
@@ -50,7 +55,7 @@ public class FirmaController {
                                        @RequestParam(name = "ep", required = false) Double endPrice,
                                        @RequestParam(name = "sd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
                                        @RequestParam(name = "ed", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
-        return this.firmaService.findAllSmetkiInFirma(page, size, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate);
+        return this.firmaService.findAllSmetkiInFirma(userPrincipal.getId().longValue(), page, size, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate);
     }
 
     @GetMapping(path = "/{idFirma}/prodavnici")

@@ -3,12 +3,11 @@ import axios from "../custom-axios/axios";
 
 const apiUtils = {
     get: (url) => {
-        // return axios.get(url, {
-        //     // headers: {
-        //     //     Authorization: token()
-        //     // }
-        // });
-        return axios.get(url);
+        return axios.get(url, {
+            headers: {
+                Authorization: token()
+            }
+        });
     },
 
     post: (url, body) => {

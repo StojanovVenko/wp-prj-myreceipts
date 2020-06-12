@@ -1,6 +1,7 @@
 package com.myreceipts.myreceipts.repository.jpa;
 
 import com.myreceipts.myreceipts.model.Smetka;
+import com.myreceipts.myreceipts.model.dto.UserMinMaxSmetkDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,69 +29,138 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             "inner join project.proizvodi as pr on pr.id_proizvod=pns.id_proizvod ", nativeQuery = true)
     List<Object> findSmetkaInfo(Integer id);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween(
-            int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+//    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween(
+//            Long idUser, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
+//    );
 
-    Page<Smetka> findAllByProdavnica_IdProdavnica(Integer idProdavnica, Pageable req);
+    Page<Smetka> findAllByUser_IdAndProdavnica_IdProdavnicaOrderByDatum(Long idUser,
+                                                            Integer idProdavnica,
+                                                            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetween(
-            int idGrad, int idProdavnica, Double startPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(
+            Long idUser,
+            int idGrad,
+            int idProdavnica,
+            Double startPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetween(
-            int idGrad, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-        );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetweenOrderByDatum(
+            Long idUser,
+            int idGrad,
+            Double startPrice,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetween (
-    int idGrad, int idProdavnica, Double endPrice, Date startDate, Date endDate, Pageable req
-            );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum (
+            Long idUser,
+            int idGrad,
+            int idProdavnica,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetween(
-    int idGrad, Double startPrice, Date startDate, Date endDate, Pageable req
-            );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(
+            Long idUser,
+            int idGrad,
+            Double startPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetween(
-            int idGrad, Double endPrice,Date startDate, Date endDate, Pageable req
-        );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(
+            Long idUser,
+            int idGrad,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetween(
-        int idGrad, int idProdavnica, Date startDate, Date endDate, Pageable req
-            );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetweenOrderByDatum(
+            Long idUser,
+            int idGrad,
+            int idProdavnica,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndDatumIsBetween(
-            int idGrad, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndDatumIsBetweenOrderByDatum(Long idUser,
+                                                                                        int idGrad,
+                                                                                        Date startDate,
+                                                                                        Date endDate,
+                                                                                        Pageable req);
 
-    Page<Smetka> findAllByDatumIsBetween(
-        Date startDate, Date endDate, Pageable req
-            );
+    Page<Smetka> findAllByUser_IdAndDatumIsBetweenOrderByDatum(Long idUser,
+                                                               Date startDate,
+                                                               Date endDate,
+                                                               Pageable req);
 
-    Page<Smetka> findAllByVkupenPrometIsGreaterThanEqualAndDatumIsBetween(
-            Double startPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(Long idUser,
+                                                                                                Double startPrice,
+                                                                                                Date startDate,
+                                                                                                Date endDate,
+                                                                                                Pageable req);
 
-    Page<Smetka> findAllByVkupenPrometIsLessThanEqualAndDatumIsBetween(
-            Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(Long idUser,
+                                                                                             Double endPrice,
+                                                                                             Date startDate,
+                                                                                             Date endDate,
+                                                                                             Pageable req);
 
-    Page<Smetka> findAllByVkupenPrometIsBetweenAndDatumIsBetween(
-            Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(Long idUser,
+                                                                                       Double startPrice,
+                                                                                       Double endPrice,
+                                                                                       Date startDate,
+                                                                                       Date endDate,
+                                                                                       Pageable req);
 
-    Page<Smetka> findByProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween (
-            int idFirma, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum (
+            Long idUser,
+            int idFirma,
+            int idProdavnica,
+            Double startPrice,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetween (
-            int idFirma, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum (
+            Long idUser,
+            int idFirma,
+            Double startPrice,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findByProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetween(
-            int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+            Long idUser,
+            int idGrad,
+            int idProdavnica,
+            Double startPrice,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
 
-    Page<Smetka> findAllByProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetween (
-            int idGrad, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
-    );
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum (
+            Long idUser,
+            int idGrad,
+            Double startPrice,
+            Double endPrice,
+            Date startDate,
+            Date endDate,
+            Pageable req);
+
+    @Query(value = "select min(s.vkupen_promet) minPrice, max(s.vkupen_promet) maxPrice, min(s.datum) minDate, max(s.datum) maxDate from project.smetki as s where s.id_user=?1 ",
+            nativeQuery = true)
+    Object findMinMaxVkupenPrometForUser(Long idUser);
+
+    @Query(value = "select sum(s.vkupen_promet) from project.smetki as s where s.id_user=?1 and s.datum between ?2 and ?3 ",
+            nativeQuery = true)
+    Double getPoslednaNedelaCeni(Long idUser, Date startDate, Date endDate);
 }

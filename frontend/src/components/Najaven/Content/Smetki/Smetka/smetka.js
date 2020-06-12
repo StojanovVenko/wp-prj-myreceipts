@@ -19,28 +19,33 @@ const Smetka = (props) => {
         cena += proizvod.kolichina * proizvod.cena;
        return <div className="mt-2 mb-2 row">
            <div className="col-sm-3">
-               {proizvod.kolichina}
+               <b> {proizvod.kolichina}</b>
            </div>
            <div className="col-sm-3">
-               {proizvod.cena}
+               <b>{proizvod.cena}</b>
            </div>
            <div className="col-sm-6">
-               {proizvod.proizvod.ime}
+               <b> {proizvod.proizvod.ime}</b>
            </div>
 
        </div>
     });
 
-    return (
 
+
+    return (
         <div className="card shadow mb-4 ">
-            {/*// <!-- Card Header - Accordion -->*/}
-            <a href={"#collapseCardExample" + props.index} onClick={() => setHide(!hide)} className="d-block card-header py-3" data-toggle="collapse"
+            <a href={"#collapseCardExample" + props.index} className="d-block card-header py-3" data-toggle="collapse"
                role="button" aria-expanded="true" aria-controls={"collapseCardExample" + props.index}>
-                {/*<h6 className="m-0 font-weight-bold text-primary">*/}
                 <div className="row text-center">
                     {/*smetka[0] -id, [1] smetka.datum, [2].vkupenIznos, [3] imeProdavnica, [4] imeFirma*/}
-                    <div className="col-sm-3">{props.smetka.datum}</div>
+                    <div className="col-sm-3">
+                        {new Intl.DateTimeFormat("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "2-digit"
+                        }).format(new Date(props.smetka.datum))}
+                    </div>
                     <div className="col-sm-3">{props.smetka.vkupenPromet} ден</div>
                     <div className="col-sm-3">{props.smetka.prodavnica.ime}</div>
                     <div className="col-sm-3">{props.smetka.prodavnica.grad.ime}</div>
@@ -117,14 +122,17 @@ const Smetka = (props) => {
 
                         </div>
                         {proizvodi}
-                        <hr/>
-                        Вкупен промет: <b>{cena}</b><br/>
-                        Вкупно ДДВ: {props.smetka.vkupnoDDV}
+
+
                         <div className="col-sm">
 
                         </div>
                     </div>
 
+                </div>
+                <div className="card-footer">
+                    Вкупен промет: <b>{cena}</b><br/>
+                    Вкупно ДДВ: {props.smetka.vkupnoDDV}
                 </div>
             </div>
         </div>

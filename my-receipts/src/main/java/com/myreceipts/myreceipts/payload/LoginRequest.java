@@ -1,4 +1,4 @@
-package com.myreceipts.myreceipts.web;
+package com.myreceipts.myreceipts.payload;
 
 import lombok.Getter;
 import lombok.Setter;

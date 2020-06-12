@@ -15,6 +15,9 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+<!--    <link href="../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link href="../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">-->
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -41,5 +44,21 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     </div>
+    <!-- Bootstrap core JavaScript-->
+<!--    <script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>-->
+<!--    <script src="../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
+    <!-- Core plugin JavaScript-->
+<!--    <script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>-->
+
+    <!-- Custom scripts for all pages-->
+<!--    <script src="../node_modules/startbootstrap-sb-admin-2/js/sb-admin-2.min.js"></script>-->
+  <script>
+    $(document).ready(function () {
+      $('#dtBasicExample').DataTable();
+      $('.dataTables_length').addClass('bs-select');
+    });
+
+  </script>
   </body>
 </html>
