@@ -83,30 +83,3 @@ const ProizvodiNaSmetki = (props) => {
 
 
 export default ProizvodiNaSmetki;
-
-// {/*// <!-- DataTales Example -->*/}
-{/*<div className="card shadow mb-4">*/}
-{/*    <div className="card-header py-3">*/}
-{/*        <h6 className="m-0 font-weight-bold text-primary">{props.imeTabela}</h6>*/}
-{/*    </div>*/}
-{/*    <div className="card-body">*/}
-{/*        <div className="table-responsive">*/}
-{/*            <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">*/}
-{/*                <thead>*/}
-{/*                <tr>*/}
-{/*                    <th>Име производ</th>*/}
-{/*                    <th>Количина</th>*/}
-{/*                    <th>Вкупно</th>*/}
-{/*                </tr>*/}
-{/*                </thead>*/}
-{/*                <tbody>*/}
-{/*                {tbody}*/}
-{/*                <tr>*/}
-{/*                    <td colSpan="2" className="text-right">Вкупен износ на сите производи во табелата</td>*/}
-{/*                    <td>{vkupno}</td>*/}
-{/*                </tr>*/}
-{/*                </tbody>*/}
-{/*            </table>*/}
-{/*        </div>*/}
-{/*    </div>*/}
-{/*</div>*/}

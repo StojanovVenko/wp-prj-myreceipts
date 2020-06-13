@@ -14,8 +14,10 @@ class Najaven extends React.Component {
                 <Sidebar/>
                 <div id="content-wrapper" className="d-flex flex-column" >
                     <div id="content" >
-                        <Header logout={this.props.logout} currentUser={this.props.currentUser}/>
-                        <Content/>
+                        <Header logout={this.props.logout}
+                                currentUser={this.props.currentUser}
+                                />
+                        <Content editUser={this.props.editUser}/>
                     </div>
                 </div>
             </div>

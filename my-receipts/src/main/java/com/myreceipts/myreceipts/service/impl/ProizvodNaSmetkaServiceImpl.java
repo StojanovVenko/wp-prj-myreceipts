@@ -4,6 +4,7 @@ import com.myreceipts.myreceipts.model.Proizvod;
 import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
 import com.myreceipts.myreceipts.model.dto.ProizvodiNaSmetkaRequest;
+import com.myreceipts.myreceipts.model.vm.Constants;
 import com.myreceipts.myreceipts.repository.ProizvodNaSmetkaRepository;
 import com.myreceipts.myreceipts.repository.ProizvodRepository;
 import com.myreceipts.myreceipts.repository.SmetkaRepository;
@@ -50,12 +51,13 @@ public class ProizvodNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
     private ProizvodNaSmetka dodadi(Integer idProizvod, Smetka smetka, Float cena, Float kolichina){
         Proizvod proizvod = this.proizvodRepository.findById(idProizvod)
                 .orElseThrow(() -> new NoSuchElementException("Ne postoi proizvod so id: " + idProizvod));
-
+        smetka.setVkupenPromet(smetka.getVkupenPromet()+kolichina*cena);
         ProizvodNaSmetka proizvodNaSmetka = new ProizvodNaSmetka();
         proizvodNaSmetka.setCena(cena);
         proizvodNaSmetka.setKolichina(kolichina);
         proizvodNaSmetka.setProizvod(proizvod);
         proizvodNaSmetka.setSmetka(smetka);
+        this.smetkaRepository.save(smetka);
         return this.pnsRepository.save(proizvodNaSmetka);
     }
 
@@ -71,22 +73,22 @@ public class ProizvodNaSmetkaServiceImpl implements ProizvodNaSmetkaService {
 
     @Override
     public List<Object> getStatsForProductsInCityForUser(Long id, Double minPrice, Double maxPrice, Date startDate, Date endDate, Integer idGrad) {
-        return this.pnsRepository.getStatsForProductsInCityForUser(id, minPrice, maxPrice, startDate, endDate, idGrad);
+        return this.pnsRepository.getStatsForProductsInCityForUser(id, minPrice, Constants.maxPrice, startDate, endDate, idGrad);
     }
 
     @Override
     public List<Object> getStatsForProductsInFirmForUser(Long id, Double minPrice, Double maxPrice, Date startDate, Date endDate, Integer idFirma) {
-        return this.pnsRepository.getStatsForProductsInFirmForUser(id, minPrice, maxPrice, startDate, endDate, idFirma);
+        return this.pnsRepository.getStatsForProductsInFirmForUser(id, minPrice, Constants.maxPrice, startDate, endDate, idFirma);
     }
 
     @Override
     public List<Object> getStatsForProductsInMarketForUser(Long id, Double minPrice, Double maxPrice, Date startDate, Date endDate, Integer idProdavnica) {
-        return this.pnsRepository.getStatsForProductsInMarketForUser(id, minPrice, maxPrice, startDate, endDate, idProdavnica);
+        return this.pnsRepository.getStatsForProductsInMarketForUser(id, minPrice, Constants.maxPrice, startDate, endDate, idProdavnica);
     }
 
     @Override
     public List<Object> getStatsForProductsForUser(Long id, Double minPrice, Double maxPrice, Date startDate, Date endDate) {
-        return pnsRepository.getStatsForProductsForUser(id, minPrice, maxPrice, startDate, endDate);
+        return pnsRepository.getStatsForProductsForUser(id, minPrice, Constants.maxPrice, startDate, endDate);
     }
 
 }

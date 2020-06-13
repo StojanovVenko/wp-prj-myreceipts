@@ -1,7 +1,7 @@
 import React from "react";
 import {withRouter} from "react-router";
 import { Chart } from "react-google-charts";
-import ProizvodiNaSmetki from "../Firmi/ProizvodiNaSmetki/proizvodiNaSmetki";
+import ProizvodiNaSmetki from "../ProizvodiNaSmetki/proizvodiNaSmetki";
 import ProizvodiNaSmetkiService from "../../../../service/proizvodiNaSmetkaService";
 import SmetkiService from "../../../../service/smetkiService";
 import Loader from "react-loader-spinner";

@@ -1,16 +1,15 @@
 import React from "react";
 import {withRouter} from "react-router";
 import Dropdown from "react-bootstrap/Dropdown";
-import {CustomMenuFirmi, CustomToggleFirmi} from "../FirimDropdown/FirmiDropdown";
-import {CustomMenuGradovi, CustomToggleGradovi} from "../GradoviDropdown/gradoviDropdown";
-import {CustomMenuProdavnici, CustomToggleProdavnici} from "../ProdavniciDropdown/prodavniciDropdown";
+import {CustomMenuFirmi, CustomToggleFirmi} from "../Dropdowns/FirimDropdown/FirmiDropdown";
+import {CustomMenuGradovi, CustomToggleGradovi} from "../Dropdowns/GradoviDropdown/gradoviDropdown";
+import {CustomMenuProdavnici, CustomToggleProdavnici} from "../Dropdowns/ProdavniciDropdown/prodavniciDropdown";
 import CustomPicker from "../Smetki/Picker/picker";
 import ProizvodiNaSmetkiService from "../../../../service/proizvodiNaSmetkaService";
 import FirmiService from "../../../../service/firmiService";
 import GradoviService from "../../../../service/gradoviService";
-import ProizvodiNaSmetki from "../Firmi/ProizvodiNaSmetki/proizvodiNaSmetki";
-// import DataTable from 'react-data-table-component';
-import { MDBDataTableV5 } from 'mdbreact';
+import ProizvodiNaSmetki from "../ProizvodiNaSmetki/proizvodiNaSmetki";
+import Loader from "react-loader-spinner";
 
 class ProizvodiStats extends React.Component {
 
@@ -188,50 +187,62 @@ class ProizvodiStats extends React.Component {
             ProizvodiNaSmetkiService.getStatsForProizvodiInProdavnica(idProdavnica,
                 this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
                 .then(response => {
-                    this.setState({
-                        idFirma: idFirma,
-                        idProdavnica: idProdavnica,
-                        imeFirma: imeFirma,
-                        imeFirmaGrad: imeFirmaGrad,
-                        imeProdavnica: imeProdavnica,
-                        listProdavnici: prodavnici,
-                        listProizvodiNaSmetki: response.data,
-                        lookFirma: true,
-                        loading: false
-                    })
+                    FirmiService.getAllProdavniciVoFirma(idFirma)
+                        .then(response2 => {
+                            prodavnici = response2.data;
+                            this.setState({
+                                idFirma: idFirma,
+                                idProdavnica: idProdavnica,
+                                imeFirma: imeFirma,
+                                imeFirmaGrad: imeFirmaGrad,
+                                imeProdavnica: imeProdavnica,
+                                listProdavnici: prodavnici,
+                                listProizvodiNaSmetki: response.data,
+                                lookFirma: true,
+                                loading: false
+                            })
+                        }).catch();
                 })
         } else {
             if (idFirma !== -1) {
                 ProizvodiNaSmetkiService.getStatsForProizvodiInFirma(idFirma,
                     this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
                     .then(response => {
-                        this.setState({
-                            idFirma: idFirma,
-                            idProdavnica: idProdavnica,
-                            imeFirma: imeFirma,
-                            imeFirmaGrad: imeFirmaGrad,
-                            imeProdavnica: imeProdavnica,
-                            listProdavnici: prodavnici,
-                            listProizvodiNaSmetki: response.data,
-                            lookFirma: true,
-                            loading: false
-                        })
+                        FirmiService.getAllProdavniciVoFirma(idFirma)
+                            .then(response2 => {
+                                prodavnici = response2.data;
+                                this.setState({
+                                    idFirma: idFirma,
+                                    idProdavnica: idProdavnica,
+                                    imeFirma: imeFirma,
+                                    imeFirmaGrad: imeFirmaGrad,
+                                    imeProdavnica: imeProdavnica,
+                                    listProdavnici: prodavnici,
+                                    listProizvodiNaSmetki: response.data,
+                                    lookFirma: true,
+                                    loading: false
+                                })
+                            }).catch();
                     })
             } else {
                 ProizvodiNaSmetkiService.getStatsForProizvodiAll(
                     this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
                     .then(response => {
-                        this.setState({
-                            idFirma: idFirma,
-                            idProdavnica: idProdavnica,
-                            imeFirma: imeFirma,
-                            imeFirmaGrad: imeFirmaGrad,
-                            imeProdavnica: imeProdavnica,
-                            listProdavnici: prodavnici,
-                            listProizvodiNaSmetki: response.data,
-                            lookFirma: true,
-                            loading: false
-                        })
+                        FirmiService.getAllProdavniciVoFirma(idFirma)
+                            .then(response2 => {
+                                prodavnici = response2.data;
+                                this.setState({
+                                    idFirma: idFirma,
+                                    idProdavnica: idProdavnica,
+                                    imeFirma: imeFirma,
+                                    imeFirmaGrad: imeFirmaGrad,
+                                    imeProdavnica: imeProdavnica,
+                                    listProdavnici: prodavnici,
+                                    listProizvodiNaSmetki: response.data,
+                                    lookFirma: true,
+                                    loading: false
+                                })
+                            }).catch();
                     })
             }
         }
@@ -256,46 +267,58 @@ class ProizvodiStats extends React.Component {
             ProizvodiNaSmetkiService.getStatsForProizvodiInProdavnica(idProdavnica,
                 this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
                 .then(response => {
-                    this.setState({
-                        idGrad: idGrad,
-                        idProdavnica: idProdavnica,
-                        imeGrad: imeGrad,
-                        imeProdavnica: imeProdavnica,
-                        listProdavnici: prodavnici,
-                        listProizvodiNaSmetki: response.data,
-                        lookFirma: false,
-                        loading: false
-                    })
+                    GradoviService.getAllProdavniciVoGrad(idGrad)
+                        .then(response2 => {
+                            prodavnici = response2.data
+                            this.setState({
+                                idGrad: idGrad,
+                                idProdavnica: idProdavnica,
+                                imeGrad: imeGrad,
+                                imeProdavnica: imeProdavnica,
+                                listProdavnici: prodavnici,
+                                listProizvodiNaSmetki: response.data,
+                                lookFirma: false,
+                                loading: false
+                            })
+                        }).catch();
                 })
         } else if (idGrad === -1) {
             ProizvodiNaSmetkiService.getStatsForProizvodiAll(this.state.minPrice, this.state.maxPrice,
                 this.state.startDate, this.state.endDate)
                 .then(response => {
-                    this.setState({
-                        idGrad: idGrad,
-                        idProdavnica: idProdavnica,
-                        imeGrad: imeGrad,
-                        imeProdavnica: imeProdavnica,
-                        listProdavnici: prodavnici,
-                        listProizvodiNaSmetki: response.data,
-                        lookFirma: false,
-                        loading: false
-                    })
+                    GradoviService.getAllProdavniciVoGrad(idGrad)
+                        .then(response2 => {
+                            prodavnici = response2.data
+                            this.setState({
+                                idGrad: idGrad,
+                                idProdavnica: idProdavnica,
+                                imeGrad: imeGrad,
+                                imeProdavnica: imeProdavnica,
+                                listProdavnici: prodavnici,
+                                listProizvodiNaSmetki: response.data,
+                                lookFirma: false,
+                                loading: false
+                            })
+                        }).catch();
                 })
         } else {
             ProizvodiNaSmetkiService.getStatsForProizvodiInCity(idGrad,
                 this.state.minPrice, this.state.maxPrice, this.state.startDate, this.state.endDate)
                 .then(response => {
-                    this.setState({
-                        idGrad: idGrad,
-                        idProdavnica: idProdavnica,
-                        imeGrad: imeGrad,
-                        imeProdavnica: imeProdavnica,
-                        listProdavnici: prodavnici,
-                        listProizvodiNaSmetki: response.data,
-                        lookFirma: false,
-                        loading: false
-                    })
+                    GradoviService.getAllProdavniciVoGrad(idGrad)
+                        .then(response2 => {
+                            prodavnici = response2.data
+                            this.setState({
+                                idGrad: idGrad,
+                                idProdavnica: idProdavnica,
+                                imeGrad: imeGrad,
+                                imeProdavnica: imeProdavnica,
+                                listProdavnici: prodavnici,
+                                listProizvodiNaSmetki: response.data,
+                                lookFirma: false,
+                                loading: false
+                            })
+                        }).catch();
                 })
         }
 
@@ -361,7 +384,7 @@ class ProizvodiStats extends React.Component {
                         <Dropdown>
 
                             <Dropdown.Toggle as={CustomToggleFirmi} id="dropdown-custom-components">
-                                {this.state.imeFirma} - {this.state.imeFirmaGrad}
+                                {this.state.imeFirma}
                             </Dropdown.Toggle>
                             <Dropdown.Menu as={CustomMenuFirmi}>
                                 <Dropdown.Item
@@ -424,7 +447,15 @@ class ProizvodiStats extends React.Component {
                                  setNewDate={this.setNewDate}/>
         };
 
+        if(this.state.loading)
+            return <div style={{marginTop: "30vh"}}><Loader
+                type="TailSpin"
+                color="#00BFFF"
+                height={150}
+                width={300}
+                timeout={300000} //3 secs
 
+            /></div>;
 
 
         return (<>

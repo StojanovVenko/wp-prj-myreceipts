@@ -8,8 +8,9 @@ import ReactPaginate from "react-paginate";
 import "./input_ranges.css";
 import CustomPicker from "./Picker/picker";
 import Dropdown from "react-bootstrap/Dropdown";
-import {CustomMenuGradovi, CustomToggleGradovi} from "../GradoviDropdown/gradoviDropdown";
-import {CustomMenuProdavnici, CustomToggleProdavnici} from "../ProdavniciDropdown/prodavniciDropdown";
+import {CustomMenuGradovi, CustomToggleGradovi} from "../Dropdowns/GradoviDropdown/gradoviDropdown";
+import {CustomMenuProdavnici, CustomToggleProdavnici} from "../Dropdowns/ProdavniciDropdown/prodavniciDropdown";
+import Loader from "react-loader-spinner";
 
 class Smetki extends React.Component {
 
@@ -19,7 +20,7 @@ class Smetki extends React.Component {
         this.state = {
             smetki: [],
             page: 0,
-            pageSize: 8,
+            pageSize: 5,
             totalPages: 0,
             minIznos: 0,
             maxIznos: 1000000,
@@ -35,6 +36,7 @@ class Smetki extends React.Component {
             sortiraj: 1, //1-datum rastecki, 2-datum opagjachki, 3-cena rastechki, 4-cena opagjachki
             startDate: new Date("2020/01/01"),
             endDate: new Date(),
+            loading: true
         }
     }
 
@@ -43,6 +45,9 @@ class Smetki extends React.Component {
     }
 
     loadSmetkiSoProdukti = (page = 0) => {
+        this.setState({
+           loading:true
+        });
         SmetkiService.getSmetkiSoProduktiSoFiltri(page, this.state.pageSize, this.state.idGrad, this.state.idProdavnica,
             this.state.minIznos, this.state.maxIznos, this.state.startDate, this.state.endDate)
             .then(response => {
@@ -50,7 +55,8 @@ class Smetki extends React.Component {
                     smetki: response.data.content,
                     page: response.data.page,
                     pageSize: response.data.pageSize,
-                    totalPages: response.data.totalPages
+                    totalPages: response.data.totalPages,
+                    loading: false
                 });
             }).catch();
     };
@@ -60,6 +66,9 @@ class Smetki extends React.Component {
     };
 
     changePageSize = (e) => {
+        this.setState({
+            loading:true
+        });
         SmetkiService.getSmetkiSoProduktiSoFiltri(0, e, this.state.idGrad, this.state.idProdavnica,
             this.state.minIznos, this.state.maxIznos, this.state.startDate, this.state.endDate)
             .then(response => {
@@ -67,7 +76,8 @@ class Smetki extends React.Component {
                     smetki: response.data.content,
                     page: response.data.page,
                     pageSize: response.data.pageSize,
-                    totalPages: response.data.totalPages
+                    totalPages: response.data.totalPages,
+                    loading: false
                 });
             }).catch();
     };
@@ -148,7 +158,15 @@ class Smetki extends React.Component {
             }
         };
 
+        if(this.state.loading)
+            return <div style={{marginTop: "30vh"}}><Loader
+                type="TailSpin"
+                color="#00BFFF"
+                height={150}
+                width={300}
+                timeout={300000} //3 secs
 
+            /></div>;
 
         return (
 

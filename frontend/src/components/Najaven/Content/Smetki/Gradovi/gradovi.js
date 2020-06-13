@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import GradoviService from "../../../../../service/gradoviService";
 import Dropdown from "react-bootstrap/Dropdown";
-import {CustomMenu, CustomToggle} from "../../GradoviDropdown/gradoviDropdown";
+import {CustomMenu, CustomToggle} from "../../Dropdowns/GradoviDropdown/gradoviDropdown";
 
 const Gradovi = (props) => {
 

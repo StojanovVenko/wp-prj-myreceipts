@@ -29,4 +29,5 @@ public interface SmetkaService {
 
     List<Double> getPoslednaNedelaCeni(Long id);
 
+    void remove(Integer id);
 }

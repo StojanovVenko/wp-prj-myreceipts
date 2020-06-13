@@ -1,17 +1,17 @@
 import React from "react";
 import FirmiService from "../../../../service/firmiService";
 import Dropdown from "react-bootstrap/Dropdown";
-import {CustomMenuFirmi, CustomToggleFirmi} from "../FirimDropdown/FirmiDropdown";
+import {CustomMenuFirmi, CustomToggleFirmi} from "../Dropdowns/FirimDropdown/FirmiDropdown";
 import {withRouter} from "react-router";
 import SmetkiService from "../../../../service/smetkiService";
 import FirmaSmetki from "./FirmaSmetki/firmaSmetki";
-import {CustomMenuProdavnici, CustomToggleProdavnici} from "../ProdavniciDropdown/prodavniciDropdown";
+import {CustomMenuProdavnici, CustomToggleProdavnici} from "../Dropdowns/ProdavniciDropdown/prodavniciDropdown";
 import CustomPicker from "../Smetki/Picker/picker";
-import {CustomMenuGradovi, CustomToggleGradovi} from "../GradoviDropdown/gradoviDropdown";
+import {CustomMenuGradovi, CustomToggleGradovi} from "../Dropdowns/GradoviDropdown/gradoviDropdown";
 import GradoviService from "../../../../service/gradoviService";
 import Loader from 'react-loader-spinner';
 import ProizvodiNaSmetkiService from "../../../../service/proizvodiNaSmetkaService";
-import ProizvodiNaSmetki from "./ProizvodiNaSmetki/proizvodiNaSmetki";
+import ProizvodiNaSmetki from "../ProizvodiNaSmetki/proizvodiNaSmetki";
 
 class Firmi extends React.Component {
 
@@ -257,6 +257,7 @@ class Firmi extends React.Component {
         } else {
             this.loadlistSmetkiVoGrad(page, pageSize, idProdavnica, imeProdavnica);
         }
+
     }
 
     getNewPageSmetki = (e) => {
@@ -334,9 +335,19 @@ class Firmi extends React.Component {
         this.loadSmetki();
     }
 
+    deleteSmetka = (smetkaId) => {
+        SmetkiService.deleteSmetka(smetkaId).then((response)=>{
+            this.setState((state) => {
+                const listSmetki = state.listSmetki.filter((t) => {
+                    return t.idSmetka !== smetkaId;
+                });
+                return {listSmetki}
+            })
+        })
+    };
+
 
     render() {
-
         const gradoviDropdown = () => {
 
             let gradoviHtml = this.state.listGradovi.map((grad, index) => {
@@ -389,7 +400,7 @@ class Firmi extends React.Component {
                     <Dropdown>
 
                         <Dropdown.Toggle as={CustomToggleFirmi} id="dropdown-custom-components">
-                            {this.state.imeFirma} - {this.state.imeFirmaGrad}
+                            {this.state.imeFirma}
                         </Dropdown.Toggle>
                         <Dropdown.Menu as={CustomMenuFirmi}>
                             {firmiHtml}
@@ -478,7 +489,7 @@ class Firmi extends React.Component {
             if(this.state.listSmetki.length===0)
                 return <div className="alert alert-primary" role="alert">
                     <h3 >Не се пронајдени фискални сметки...</h3>
-                </div>
+                </div>;
             return <FirmaSmetki
                 listSmetki={this.state.listSmetki}
                 page={this.state.smetkiPage}
@@ -487,6 +498,7 @@ class Firmi extends React.Component {
                 changePageSize={this.changePageSize}
                 getNewPage={this.getNewPageSmetki}
                 isLoading={this.state.isLoading}
+                deleteSmetka={this.deleteSmetka}
             />;
         };
 

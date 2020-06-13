@@ -81,7 +81,17 @@ const Smetki = {
                 'page-size': size
             }
         });
-    }
+    },
+
+    deleteSmetka: (smetkaId) => {
+        console.log("smetkaId");
+        console.log(smetkaId);
+        return axios.delete(`/api/smetki/${smetkaId}/delete`, {
+            headers: {
+                Authorization: token()
+            }
+        });
+    },
 
 };
 

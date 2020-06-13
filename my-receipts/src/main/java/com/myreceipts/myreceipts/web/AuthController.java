@@ -5,15 +5,17 @@ import com.myreceipts.myreceipts.model.RoleName;
 import com.myreceipts.myreceipts.model.User;
 import com.myreceipts.myreceipts.model.dto.UserDetailsDto;
 import com.myreceipts.myreceipts.model.exceptions.AppException;
-import com.myreceipts.myreceipts.payload.ApiResponse;
-import com.myreceipts.myreceipts.payload.JwtAuthenticationResponse;
-import com.myreceipts.myreceipts.payload.LoginRequest;
-import com.myreceipts.myreceipts.payload.SignUpRequest;
+import com.myreceipts.myreceipts.security.payload.ApiResponse;
+import com.myreceipts.myreceipts.security.payload.JwtAuthenticationResponse;
+import com.myreceipts.myreceipts.security.payload.LoginRequest;
+import com.myreceipts.myreceipts.security.payload.SignUpRequest;
 import com.myreceipts.myreceipts.repository.RoleRepository;
 import com.myreceipts.myreceipts.repository.UserRepository;
 import com.myreceipts.myreceipts.security.CurrentUser;
 import com.myreceipts.myreceipts.security.JwtTokenProvider;
 import com.myreceipts.myreceipts.security.UserPrincipal;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/auth", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
@@ -113,6 +116,22 @@ public class AuthController {
         dto.setName(userPrincipal.getName());
         dto.setUsername(userPrincipal.getUsername());
         return dto;
+    }
+
+    @PostMapping("/update")
+    @PreAuthorize("isAuthenticated()")
+    @Transactional
+    public UserDetailsDto updateUser(@CurrentUser UserPrincipal userPrincipal,
+                                     @RequestBody UserDetailsDto req){
+        Optional<User> user = this.userRepository.findById(userPrincipal.getId());
+        if(user.isPresent()){
+            User u = user.get();
+            u.setName(req.getName());
+            u.setUsername(req.getUsername());
+            u.setEmail(req.getMail());
+            this.userRepository.save(u);
+        }
+        return req;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.myreceipts.myreceipts.payload;
+package com.myreceipts.myreceipts.security.payload;
 
 import lombok.Getter;
 import lombok.Setter;

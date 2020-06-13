@@ -18,13 +18,13 @@ const Smetka = (props) => {
     let proizvodi = state.map((proizvod,index) => {
         cena += proizvod.kolichina * proizvod.cena;
        return <div className="mt-2 mb-2 row">
-           <div className="col-sm-3">
+           <div className="col-sm-4">
                <b> {proizvod.kolichina}</b>
            </div>
-           <div className="col-sm-3">
+           <div className="col-sm-4">
                <b>{proizvod.cena}</b>
            </div>
-           <div className="col-sm-6">
+           <div className="col-sm-4">
                <b> {proizvod.proizvod.ime}</b>
            </div>
 
@@ -55,80 +55,105 @@ const Smetka = (props) => {
             {/*// <!-- Card Content - Collapse -->*/}
             <div className={"collapse hide"} id={"collapseCardExample" + props.index}>
                 <div className="card-body row">
+
                     <div className="col-sm-2">
 
                     </div>
                     <div className="col-sm-8 ">
-                        Фирма:
-                        <Link to={{
-                            pathname: `/firmi`,
-                            state: { idFirma: props.smetka.prodavnica.firma.idFirma,
-                                idProdavnica: -1,
-                                imeProdavnica: "Сите продавници",
-                                idGrad: -1,
-                                imeGrad: "Избери град",
-                                lookFirma: true,
-                            firma: props.smetka.prodavnica.firma}
-                        }}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa}
-                        </Link>
-                        - <Link to={{
-                        pathname: `/firmi`,
-                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
-                            idProdavnica: -1,
-                            imeProdavnica: "Сите продавници",
-                            idGrad: props.smetka.prodavnica.firma.grad.idGrad,
-                            imeGrad: props.smetka.prodavnica.firma.grad.ime,
-                            lookFirma: false,
-                            firma: props.smetka.prodavnica.firma}
-                    }}>{props.smetka.prodavnica.firma.grad.ime}</Link>
-                        <br/>
-                        Продавница: <Link to={{
-                        pathname: `/firmi`,
-                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
-                            idProdavnica: props.smetka.prodavnica.idProdavnica,
-                            imeProdavnica: props.smetka.prodavnica.ime,
-                            idGrad: -1,
-                            imeGrad: "Избери град",
-                            lookFirma: true,
-                            firma: props.smetka.prodavnica.firma}
-                    }}> {props.smetka.prodavnica.ime}, {props.smetka.prodavnica.adresa}</Link>
-                        -
-                        <Link to={{
-                        pathname: `/firmi`,
-                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
-                            idProdavnica: -1,
-                            imeProdavnica: "Сите продавници",
-                            idGrad: props.smetka.prodavnica.grad.idGrad,
-                            imeGrad: props.smetka.prodavnica.grad.ime,
-                            lookFirma: false,
-                            firma: props.smetka.prodavnica.firma}
-                    }}>{props.smetka.prodavnica.grad.ime}</Link>
+                        <div className="card shadow pt-3 pb-3">
+                        <div className="row">
+                            <div className="col-sm-5 text-right">
+                                Фирма:
+                            </div>
+                            <div className="col-sm-7 pl-3 text-left">
+                                <b> <Link to={{
+                                    pathname: `/firmi`,
+                                    state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                                        idProdavnica: -1,
+                                        imeProdavnica: "Сите продавници",
+                                        idGrad: -1,
+                                        imeGrad: "Избери град",
+                                        lookFirma: true,
+                                        firma: props.smetka.prodavnica.firma}
+                                }}> {props.smetka.prodavnica.firma.ime}, {props.smetka.prodavnica.firma.adresa}
+                                </Link>
+                                    - <Link to={{
+                                        pathname: `/firmi`,
+                                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                                            idProdavnica: -1,
+                                            imeProdavnica: "Сите продавници",
+                                            idGrad: props.smetka.prodavnica.firma.grad.idGrad,
+                                            imeGrad: props.smetka.prodavnica.firma.grad.ime,
+                                            lookFirma: false,
+                                            firma: props.smetka.prodavnica.firma}
+                                    }}>{props.smetka.prodavnica.firma.grad.ime}</Link></b>
+                            </div>
+                        </div>
 
-                        <br/>
-                        Даночен број: {props.smetka.danochenBroj}
-                        <br/>
-                        ДДВ број: {props.smetka.ddvBroj}
-                        <hr/>
-                        <div className="mt-2 mb-2 row ">
-                            <div className="col-sm-3">
+                        <div className="row">
+                            <div className="col-sm-5 text-right">
+                                Продавница:
+                            </div>
+                            <div className="col-sm-7 pl-3 text-left">
+                                <b><Link to={{
+                                    pathname: `/firmi`,
+                                    state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                                        idProdavnica: props.smetka.prodavnica.idProdavnica,
+                                        imeProdavnica: props.smetka.prodavnica.ime,
+                                        idGrad: -1,
+                                        imeGrad: "Избери град",
+                                        lookFirma: true,
+                                        firma: props.smetka.prodavnica.firma}
+                                }}> {props.smetka.prodavnica.ime}, {props.smetka.prodavnica.adresa}</Link>
+                                    -
+                                    <Link to={{
+                                        pathname: `/firmi`,
+                                        state: { idFirma: props.smetka.prodavnica.firma.idFirma,
+                                            idProdavnica: -1,
+                                            imeProdavnica: "Сите продавници",
+                                            idGrad: props.smetka.prodavnica.grad.idGrad,
+                                            imeGrad: props.smetka.prodavnica.grad.ime,
+                                            lookFirma: false,
+                                            firma: props.smetka.prodavnica.firma}
+                                    }}>{props.smetka.prodavnica.grad.ime}</Link></b>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-5 text-right">
+                                Даночен број:
+                            </div>
+                            <div className="col-sm-7 pl-3 text-left">
+                                <b>{props.smetka.danochenBroj===null? "Нема" :props.smetka.danochenBroj}</b>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-5 text-right">
+                                ДДВ број:
+                            </div>
+                            <div className="col-sm-7 pl-3 text-left">
+                                <b>{props.smetka.ddvBroj===null? "Нема" :props.smetka.ddvBroj}</b>
+                            </div>
+                        </div>
+                        <hr className="ml-auto mr-auto" style={{width:"60%"}}/>
+                        <div className="mt-2 mb-2 row text-center">
+                            <div className="col-sm-4">
                                 Количина
                             </div>
-                            <div className="col-sm-3">
+                            <div className="col-sm-4">
                                 Цена
                             </div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-4">
                                 Производ
                             </div>
 
                         </div>
                         {proizvodi}
 
-
                         <div className="col-sm">
 
                         </div>
                     </div>
-
+                    </div>
                 </div>
                 <div className="card-footer">
                     Вкупен промет: <b>{cena}</b><br/>

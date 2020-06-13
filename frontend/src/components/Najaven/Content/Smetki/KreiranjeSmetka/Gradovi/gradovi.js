@@ -1,7 +1,7 @@
 import React from 'react';
 import GradoviService from "../../../../../../service/gradoviService";
 import Dropdown from "react-bootstrap/Dropdown";
-import {CustomMenuGradovi, CustomToggleGradovi} from "../../../GradoviDropdown/gradoviDropdown";
+import {CustomMenuGradovi, CustomToggleGradovi} from "../../../Dropdowns/GradoviDropdown/gradoviDropdown";
 
 class Gradovi extends React.Component {
     constructor(params){

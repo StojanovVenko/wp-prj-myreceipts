@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import SmetkiService from "../../../../../../service/smetkiService";
 import {Link} from "react-router-dom";
 
-const SmetkaDetails = (props) => {
+const SmetkaDetailsEdit = (props) => {
+
     let [state, setState] = useState([]);
+
     useEffect(() => {
         SmetkiService.getSmetkaIfno(props.smetkaProps !== undefined ? props.smetkaProps.smetka.idSmetka : 0)
             .then(response => {
@@ -12,19 +14,19 @@ const SmetkaDetails = (props) => {
             }).catch();
     }, []);
 
-    const deleteSmetka = () => {
-        props.deleteSmetka(props.smetkaProps.smetka.idSmetka)
+    const saveSmetka = (e) => {
+
     };
 
     if (props.smetkaProps === undefined) {
         return <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h5 className="card-title">Детали за сметка</h5>
+                <h5 className="card-title">Ажурирање на сметка</h5>
 
             </div>
             <div className="card-body">
-                    <img className="rounded-circle " src={require('../../../../../../fiskalni.jpg')} width="70%"
-                         height="200px"/>
+                <img className="rounded-circle " src={require('../../../../../../fiskalni.jpg')} width="70%"
+                     height="200px"/>
 
                 <hr/>
                 Избери сметка за која што сакаш да ги погледнеш деталите
@@ -37,13 +39,13 @@ const SmetkaDetails = (props) => {
         cena += proizvod.kolichina * proizvod.cena;
         return <div className="mt-2 mb-2 row">
             <div className="col-sm-3">
-                {proizvod.kolichina}
+              <input className="form-control" name={"kolichina-" + index}  value={proizvod.kolichina} />
             </div>
             <div className="col-sm-3">
-                {proizvod.cena}
+                <input className="form-control" name={"cena-" + index}  value={proizvod.cena} />
             </div>
             <div className="col-sm-6">
-                {proizvod.proizvod.ime}
+                <input className="form-control" name={"ime-" + index}  value={proizvod.proizvod.ime} />
             </div>
 
         </div>
@@ -52,22 +54,7 @@ const SmetkaDetails = (props) => {
     return (
         <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h5 className="card-title">Детали за сметка</h5>
-                <div className="dropdown no-arrow">
-                    <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"/>
-                    </a>
-                    <div className="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                         aria-labelledby="dropdownMenuLink">
-                        {/*<div className="dropdown-header">Dropdown Header:</div>*/}
-                        {/*<button*/}
-                        {/*    onClick={() => props.editMode(true)}*/}
-                        {/*    className="dropdown-item btn-default">Измени</button>*/}
-                        {/*<div className="dropdown-divider"/>*/}
-                        <button  onClick={deleteSmetka} className="dropdown-item btn-default">Избриши</button>
-                    </div>
-                </div>
+                <h5 className="card-title">Ажурирање на сметка</h5>
             </div>
             <div className="card-body">
                 <div className="row">
@@ -88,10 +75,18 @@ const SmetkaDetails = (props) => {
                 </div>
                 <div className="row">
                             <span style={{width: "35%"}} className="text-right">
+                                 Вкупно ДДВ:
+                            </span>
+                    <span className="pl-3">
+                                <input className="form-control" name="ddv" value={props.smetkaProps.smetka.vkupnoDDV} />
+                            </span>
+                </div>
+                <div className="row">
+                            <span style={{width: "35%"}} className="text-right">
                                 даночен број:
                             </span>
                     <span className="pl-3">
-                                {props.smetkaProps.smetka.danochenBroj} - {props.smetkaProps.smetka.prodavnica.grad.ime}
+                                 <input className="form-control" name="danochenBroj" value={props.smetkaProps.smetka.danochenBroj}/>
                             </span>
                 </div>
                 <div className="row">
@@ -99,7 +94,7 @@ const SmetkaDetails = (props) => {
                                 ДДВ број:
                             </span>
                     <span className="pl-3">
-                                {props.smetkaProps.smetka.ddvBroj}
+                               <input className="form-control" name="ddvBroj" value={props.smetkaProps.smetka.ddvBroj} />
                             </span>
                 </div>
                 <hr/>
@@ -119,12 +114,21 @@ const SmetkaDetails = (props) => {
 
             <div className="card-body">
                 <hr/>
-                Вкупен промет: <b>{cena}</b><br/>
-                Вкупно ДДВ: {props.smetkaProps.smetka.vkupnoDDV}
+
+                <div className="row">
+                    <div className="col-sm-6">
+                        <Link onClick={() => props.editMode(false)} className="btn btn-outline-primary btn-block">
+                            Назад
+                        </Link>
+                    </div>
+                    <div className="col-sm-6">
+                        <input type="button" onclick={saveSmetka} className="btn btn-outline-primary btn-block" value="Зачувај" />
+                    </div>
+                </div>
             </div>
         </div>
     )
 
 };
 
-export default SmetkaDetails;
+export default SmetkaDetailsEdit;

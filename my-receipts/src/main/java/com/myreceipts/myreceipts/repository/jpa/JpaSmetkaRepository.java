@@ -33,11 +33,11 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
 //            Long idUser, int idGrad, int idProdavnica, Double startPrice, Double endPrice, Date startDate, Date endDate, Pageable req
 //    );
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_IdProdavnicaOrderByDatum(Long idUser,
+    Page<Smetka> findAllByUser_IdAndProdavnica_IdProdavnicaOrderByDatumDesc(Long idUser,
                                                             Integer idProdavnica,
                                                             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatumDesc(
             Long idUser,
             int idGrad,
             int idProdavnica,
@@ -46,7 +46,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetweenOrderByDatum(
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetweenOrderByDatumDesc(
             Long idUser,
             int idGrad,
             Double startPrice,
@@ -55,7 +55,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum (
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatumDesc (
             Long idUser,
             int idGrad,
             int idProdavnica,
@@ -64,7 +64,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatumDesc(
             Long idUser,
             int idGrad,
             Double startPrice,
@@ -72,7 +72,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatumDesc(
             Long idUser,
             int idGrad,
             Double endPrice,
@@ -80,7 +80,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetweenOrderByDatum(
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetweenOrderByDatumDesc(
             Long idUser,
             int idGrad,
             int idProdavnica,
@@ -88,37 +88,37 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndDatumIsBetweenOrderByDatum(Long idUser,
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndDatumIsBetweenOrderByDatumDesc(Long idUser,
                                                                                         int idGrad,
                                                                                         Date startDate,
                                                                                         Date endDate,
                                                                                         Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndDatumIsBetweenOrderByDatum(Long idUser,
+    Page<Smetka> findAllByUser_IdAndDatumIsBetweenOrderByDatumDesc(Long idUser,
                                                                Date startDate,
                                                                Date endDate,
                                                                Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(Long idUser,
+    Page<Smetka> findAllByUser_IdAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatumDesc(Long idUser,
                                                                                                 Double startPrice,
                                                                                                 Date startDate,
                                                                                                 Date endDate,
                                                                                                 Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(Long idUser,
+    Page<Smetka> findAllByUser_IdAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatumDesc(Long idUser,
                                                                                              Double endPrice,
                                                                                              Date startDate,
                                                                                              Date endDate,
                                                                                              Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(Long idUser,
+    Page<Smetka> findAllByUser_IdAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(Long idUser,
                                                                                        Double startPrice,
                                                                                        Double endPrice,
                                                                                        Date startDate,
                                                                                        Date endDate,
                                                                                        Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum (
+    Page<Smetka> findAllByUser_IdAndProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc (
             Long idUser,
             int idFirma,
             int idProdavnica,
@@ -128,7 +128,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum (
+    Page<Smetka> findAllByUser_IdAndProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc (
             Long idUser,
             int idFirma,
             Double startPrice,
@@ -137,7 +137,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(
             Long idUser,
             int idGrad,
             int idProdavnica,
@@ -147,7 +147,7 @@ public interface JpaSmetkaRepository extends JpaRepository<Smetka, Integer> {
             Date endDate,
             Pageable req);
 
-    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum (
+    Page<Smetka> findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc (
             Long idUser,
             int idGrad,
             Double startPrice,

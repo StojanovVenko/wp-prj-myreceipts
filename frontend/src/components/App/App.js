@@ -55,6 +55,24 @@ class App extends React.Component {
         });
     };
 
+    updateProfile = ((editProifle) => {
+        this.setState({isLoading: true});
+        Auth.updateUser(editProifle)
+            .then(response => {
+                this.setState({
+                    currentUser: response.data,
+                    isLoading:false
+                })
+                console.log("succ")
+
+            }).catch(err => {
+                this.setState({
+                    isLoading:false
+                })
+            console.log("errr here")
+        });
+    });
+
     componentDidMount() {
         if(this.state.currentUser!==null) {
             this.props.history.push('/login');
@@ -97,6 +115,7 @@ class App extends React.Component {
                     path='/'
                     component={Najaven}
                     logout={this.handleLogout}
+                    editUser={this.updateProfile}
                 />
                 {/*<Route path={"/"}>*/}
 

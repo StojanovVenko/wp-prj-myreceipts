@@ -85,13 +85,6 @@ const Sidebar = (props) => {
                     </li>
 
 
-                    {/*// <!-- Nav Item - Utilities Collapse Menu -->*/}
-                    <li className="nav-item">
-                        <Link to="/zadachi" className="nav-link">
-                            <i className="fas fa-fw fa-folder" />
-                            <span> Задачи</span></Link>
-                    </li>
-
 
                     {/*// <!-- Divider -->*/}
                     <hr className="sidebar-divider"/>

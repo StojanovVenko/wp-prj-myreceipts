@@ -3,15 +3,18 @@ package com.myreceipts.myreceipts.service.impl;
 import com.myreceipts.myreceipts.model.Prodavnica;
 import com.myreceipts.myreceipts.model.ProizvodNaSmetka;
 import com.myreceipts.myreceipts.model.Smetka;
+import com.myreceipts.myreceipts.model.User;
 import com.myreceipts.myreceipts.model.vm.Constants;
 import com.myreceipts.myreceipts.model.vm.Page;
 import com.myreceipts.myreceipts.repository.ProizvodNaSmetkaRepository;
 import com.myreceipts.myreceipts.repository.ProdavnicaRepository;
 import com.myreceipts.myreceipts.repository.SmetkaRepository;
+import com.myreceipts.myreceipts.repository.UserRepository;
 import com.myreceipts.myreceipts.service.SmetkaService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SmetkaServiceImpl implements SmetkaService {
@@ -19,11 +22,13 @@ public class SmetkaServiceImpl implements SmetkaService {
     private final SmetkaRepository smetkaRepository;
     private final ProdavnicaRepository prodavnicaRepository;
     private final ProizvodNaSmetkaRepository proizvodiNaSmetkaRepository;
+    private final UserRepository userRepository;
 
-    public SmetkaServiceImpl(SmetkaRepository smetkaRepository, ProdavnicaRepository prodavnicaRepository, ProizvodNaSmetkaRepository proizvodiNaSmetkaRepository) {
+    public SmetkaServiceImpl(SmetkaRepository smetkaRepository, ProdavnicaRepository prodavnicaRepository, ProizvodNaSmetkaRepository proizvodiNaSmetkaRepository, UserRepository userRepository) {
         this.smetkaRepository = smetkaRepository;
         this.prodavnicaRepository = prodavnicaRepository;
         this.proizvodiNaSmetkaRepository = proizvodiNaSmetkaRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -114,6 +119,18 @@ public class SmetkaServiceImpl implements SmetkaService {
             ceni.add(i, sum==null ? 0 : sum);
         }
         return ceni;
+    }
+
+    @Override
+    public void remove(Integer id) {
+        Optional<Smetka> smetka = this.smetkaRepository.findById(id);
+        if(!smetka.isPresent())
+            return;
+        Smetka s = smetka.get();
+        s.getUser().setSmetkaList(s.getUser().getSmetkaList()
+                .stream()
+                .filter(ss -> !ss.getIdSmetka().equals(id)).collect(Collectors.toList()));
+        this.smetkaRepository.remove(s);
     }
 
     private Date getDate(Integer offset) {

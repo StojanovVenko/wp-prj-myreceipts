@@ -5,6 +5,8 @@ import KreiranjeSmetka from "./Smetki/KreiranjeSmetka/kreiranjeSmetka";
 import Gradovi from "./Gradovi/gradovi";
 import Firms from "./Firmi/firmi";
 import ProfileInfo from "./ProfileInfo/profileInfo";
+import ProfileInfoEdit from "./ProfileInfoEdit/profileInfoEdit";
+
 import SmetkiService from "../../../service/smetkiService";
 import Pochetna from "./../Content/Pochetna/pochetna";
 import ProizvodiStats from "./ProizvodiStats/proizvodiStats";
@@ -56,9 +58,6 @@ class Content extends React.Component {
                             startDate={this.state.startDate}
                             endDate={this.state.endDate}/>
                 </Route>
-                <Route path={"/zadachi"} exact>
-                    Zadachi
-                </Route>
                 <Route path={"/proizvodi"} exact
                        component={() => <ProizvodiStats
                            minPrice={this.state.minPrice}
@@ -66,20 +65,12 @@ class Content extends React.Component {
                            startDate={this.state.startDate}
                            endDate={this.state.endDate}/>}>
                 </Route>
-                <Route path={"zadachi/dodadi"} exact>
-                    Dodadi zadacha
-                </Route>
                 <Route path={"/profil"} exact>
                     <ProfileInfo/>
                 </Route>
-                <Route path={"/odjava"} exact>
-                    Odjava
-                </Route>
-                <Route path={"/postavki"} exact>
-                    Postavki
-                </Route>
-                <Route path={"/prodavnici"} exact>
-                    Prodavnici
+                <Route path={"/profil/edit"}>
+                    <ProfileInfoEdit
+                        editUser={this.props.editUser}/>
                 </Route>
                 <Route path={"/firmi"} exact
                        component={() => <Firms

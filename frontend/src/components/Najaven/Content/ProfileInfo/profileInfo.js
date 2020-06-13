@@ -9,7 +9,8 @@ class ProfileInfo extends React.Component {
         super(props);
 
         this.state = {
-            currUser: null
+            currUser: null,
+            editMode: false,
         }
     }
 
@@ -21,7 +22,10 @@ class ProfileInfo extends React.Component {
         AuthService.getCurrentUser()
             .then(response => {
                 this.setState({
-                    currUser: response.data
+                    currUser: response.data,
+                    // name: response.data.name,
+                    // username: response.data.username,
+                    // mail: response.data.mail
                 })
             })
             .catch();
@@ -30,6 +34,8 @@ class ProfileInfo extends React.Component {
     render() {
 
         if(this.state.currUser===null) return <></>;
+        // if(this.state.editMode) {
+
         return <div className="text-center">
             <br/>
             <br/>
@@ -44,7 +50,10 @@ class ProfileInfo extends React.Component {
             <br/>
             <sub>електронска пошта</sub>
             <h5><b>{this.state.currUser.mail}</b></h5>
+            <hr className="w-25"/>
+            <Link to={"/profil/edit"} className="btn btn-outline-primary ml-auto mr-auto btn-block w-25">Уреди го профилот</Link>
         </div>
+
     }
 }
 

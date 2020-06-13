@@ -79,4 +79,9 @@ public class SmetkaController {
         return this.smetkaService.getPoslednaNedelaCeni(userPrincipal.getId());
     }
 
+    @DeleteMapping("/{id}/delete")
+    public void deleteSmetka(@PathVariable Integer id) {
+        this.smetkaService.remove(id);
+    }
+
 }

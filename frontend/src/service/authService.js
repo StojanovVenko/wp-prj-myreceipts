@@ -24,7 +24,26 @@ const Auth = {
             return Promise.reject("No access token set.");
         }
         return apiUtils.get('/api/auth/me');
+    },
+    updateUser: (request) => {
+        const data = JSON.stringify(request);
+        console.log("request");
+        console.log(request);
+        console.log(data);
+        return axios.post("/api/auth/update", data, {
+            headers: {
+                Authorization: token(),
+                'content-type': 'application/json'
+            }
+        });
     }
 };
+
+function token() {
+    if(localStorage.getItem(ACCESS_TOKEN)) {
+        return 'Bearer ' + localStorage.getItem(ACCESS_TOKEN);
+    }
+    return '';
+}
 
 export default Auth;

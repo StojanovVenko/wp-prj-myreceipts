@@ -36,7 +36,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                           int idProdavnica, Double startPrice,
                                                           Double endPrice, Date startDate, Date endDate) {
                 Pageable req = PageRequest.of(page, size);
-        org.springframework.data.domain.Page<Smetka> result = this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+        org.springframework.data.domain.Page<Smetka> result = this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(
                 idUser, idGrad, idProdavnica, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
         );
 //        org.springframework.data.domain.Page<Smetka> result = this.repository.findAllByProdavnica_IdProdavnica(
@@ -78,7 +78,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, idProdavnica, startPrice, startDate, endDate, PageRequest.of(page, size));
 
         return new Page<>(page,
@@ -97,7 +97,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                           Date startDate,
                                                           Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometBetweenAndDatumBetweenOrderByDatumDesc(
                         idUser, idGrad, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
 
@@ -117,7 +117,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, idProdavnica, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
 
@@ -136,7 +136,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, startPrice, startDate, endDate, PageRequest.of(page, size)
                 );
 
@@ -155,7 +155,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
 
@@ -173,7 +173,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                           int idProdavnica,
                                                           Date startDate, Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, idProdavnica, startDate, endDate, PageRequest.of(page, size)
                 );
 
@@ -191,7 +191,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatum(idUser, startPrice,startDate,
+                this.repository.findAllByUser_IdAndVkupenPrometIsGreaterThanEqualAndDatumIsBetweenOrderByDatumDesc(idUser, startPrice,startDate,
                         endDate, PageRequest.of(page, size)
                 );
 
@@ -209,7 +209,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatum(idUser, endPrice,startDate,
+                this.repository.findAllByUser_IdAndVkupenPrometIsLessThanEqualAndDatumIsBetweenOrderByDatumDesc(idUser, endPrice,startDate,
                         endDate, PageRequest.of(page, size)
                 );
 
@@ -228,7 +228,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                           Date startDate,
                                                           Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(idUser, startPrice, endPrice,startDate,
+                this.repository.findAllByUser_IdAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(idUser, startPrice, endPrice,startDate,
                         endDate, PageRequest.of(page, size)
                 );
 
@@ -249,7 +249,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                                  Date startDate,
                                                                  Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Firma_IdFirmaAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idFirma, idProdavnica, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
         return new Page<>(page,
@@ -268,7 +268,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                                  Date startDate,
                                                                  Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Firma_IdFirmaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idFirma, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
         return new Page<>(page,
@@ -288,7 +288,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                                 Date startDate,
                                                                 Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndProdavnica_IdProdavnicaAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, idProdavnica, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
         return new Page<>(page,
@@ -307,7 +307,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                                 Date startDate,
                                                                 Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndVkupenPrometIsBetweenAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, startPrice, endPrice, startDate, endDate, PageRequest.of(page, size)
                 );
         return new Page<>(page,
@@ -327,6 +327,11 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
     }
 
     @Override
+    public void remove(Smetka s) {
+        this.repository.delete(s);
+    }
+
+    @Override
     public Page<Smetka> findAllSmetkiWithProductsFiltered(Long idUser,
                                                           int page,
                                                           int size,
@@ -334,7 +339,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                           Date startDate,
                                                           Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndDatumIsBetweenOrderByDatum(
+                this.repository.findAllByUser_IdAndProdavnica_Grad_IdGradAndDatumIsBetweenOrderByDatumDesc(
                         idUser, idGrad, startDate, endDate, PageRequest.of(page, size)
                 );
 
@@ -351,7 +356,7 @@ public class SmetkaRepositoryImpl implements SmetkaRepository {
                                                             Date startDate,
                                                             Date endDate) {
         org.springframework.data.domain.Page<Smetka> result =
-               this.repository.findAllByUser_IdAndDatumIsBetweenOrderByDatum(idUser, startDate, endDate, PageRequest.of(page, size));
+               this.repository.findAllByUser_IdAndDatumIsBetweenOrderByDatumDesc(idUser, startDate, endDate, PageRequest.of(page, size));
 
         return new Page<>(page,
                 result.getTotalPages(),

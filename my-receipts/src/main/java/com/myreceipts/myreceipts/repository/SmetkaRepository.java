@@ -57,4 +57,6 @@ public interface SmetkaRepository {
     Object getMinMaxForUser(Long idUser);
 
     Double getPoslednaNedelaCeni(Long idUser, Date startDate, Date endDate);
+
+    void remove(Smetka s);
 }
